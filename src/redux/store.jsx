@@ -1,5 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { MainReducer, CartReducer, HeadReducer, FooterReducer } from "./slices";
+import {
+  MainReducer,
+  CartReducer,
+  HeadReducer,
+  FooterReducer,
+  ProductReducer,
+} from "./slices";
 
 export const store = configureStore({
   reducer: {
@@ -7,5 +13,6 @@ export const store = configureStore({
     main: MainReducer,
     head: HeadReducer,
     footer: FooterReducer,
+    product: ProductReducer,
   },
 });

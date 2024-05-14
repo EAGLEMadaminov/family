@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { checkCount } from "../../../redux/slices/footer";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  getSelectedProduct,
+  showSingleProduct,
+} from "../../../redux/slices/product";
 const Products = ({ data }) => {
   const [productStates, setProductStates] = useState({});
   const [products, setProducts] = useState(data);
   const countChange = useSelector((store) => store.footer.isChangeCount);
-  const [showProduct, setShowProduct] = useState(false);
-  const [selectProduct, setSelectProduct] = useState();
+
   const dispatch = useDispatch();
 
   const subsFunction = (array, product) => {
@@ -72,17 +75,6 @@ const Products = ({ data }) => {
 
   return (
     <div className="mx-5 flex justify-between flex-wrap">
-      {showProduct ? (
-        <div className="fixed left-0 right-0 h-[80vh] bg-white w-full">
-          <img
-            src={selectProduct.image}
-            alt="product-image"
-            className="w-[100%] object-cover h-[300px]"
-          />
-        </div>
-      ) : (
-        ""
-      )}
       {data.map((product) => {
         const productState = productStates[product.id] || {};
         const { showPrice = false, count = 1 } = productState;
@@ -90,14 +82,14 @@ const Products = ({ data }) => {
           <div
             className="flex flex-col w-[45%] sm:w-[30%] my-3 "
             key={product.id}
-            onClick={() => {
-              setSelectProduct(product);
-              setShowProduct(true);
-            }}
           >
             <img
               src={product.image}
-              className="h-[150px] w-[150px] rounded-xl object-cover"
+              onClick={() => {
+                dispatch(getSelectedProduct(product));
+                dispatch(showSingleProduct(true));
+              }}
+              className="h-[150px] w-[150px] rounded-xl object-cover product-shadow"
               alt="Food image"
             />
             <h3 className="font-semibold text-[16px] capitalize ml-2 mb-0">

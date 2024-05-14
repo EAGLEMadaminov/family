@@ -5,7 +5,7 @@ const Restaurant = ({ data, styles, textStyle }) => {
   return (
     <div
       key={data.id}
-      className={`rounded-xl mb-5 cursor-pointer `}
+      className={`rounded-xl mb-5 cursor-pointer w-[100%] md:w-[270px] `}
       onClick={() => naviagte(`/category/${data.id}`)}
     >
       <div className="relative rounded-3xl">

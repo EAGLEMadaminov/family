@@ -9,6 +9,7 @@ import {
   OrderPage,
   CommentsPage,
   RestaurantPage,
+  LikesPage,
 } from "../../Pages";
 
 export const router = createBrowserRouter([
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: "/category/:id",
         element: <RestaurantPage />,
+      },
+      {
+        path: "/like",
+        element: <LikesPage />,
       },
     ],
   },
