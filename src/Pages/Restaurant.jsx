@@ -1,21 +1,62 @@
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { categories } from "../utils/Data";
 import RestaurantComponent from "../components/RestaurantComponent";
 
 import Products from "../features/restaurant/components/products";
+
 const Restaurant = () => {
+  const [showElement, setShowElement] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
   const [searchValue, setSearchValue] = useState("");
   const { id } = useParams();
   const lang = useSelector((store) => store.main.lang);
   let data = categories.filter((item) => item.id == id);
+
+  const sectionRefs = useRef(
+    data[0].options?.reduce((acc, option) => {
+      acc[option.id] = React.createRef();
+      return acc;
+    }, {})
+  );
+
+  const handleScroll = () => {
+    if (window.scrollY > 300) {
+      setShowElement(true);
+    } else {
+      setShowElement(false);
+    }
+
+    const scrollPosition = window.scrollY + window.innerHeight / 2;
+    let newActiveSection = null;
+    data[0].options.forEach((option) => {
+      const ref = sectionRefs.current[option.id].current;
+      if (
+        ref &&
+        ref.offsetTop + 230 <= scrollPosition &&
+        ref.offsetTop + ref.offsetHeight > scrollPosition-200
+      ) {
+        newActiveSection = option.id;
+      }
+    });
+    setActiveSection(newActiveSection);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const handleChange = async (e) => {
     let value = e.target.value;
     setSearchValue(value);
   };
+
   return (
-    <div className="translate-y-[-100px] mt-[170px]">
+    <div className="my-[80px] w-[calc(screen-50px)]">
       {data.map((one) => {
         return (
           <RestaurantComponent
@@ -26,6 +67,29 @@ const Restaurant = () => {
           />
         );
       })}
+
+      {showElement ? (
+        <div className="fixed top-[90px]  py-5 w-screen no-scrollbar snap-x snap-mandatory overflow-x-scroll z-[1000000000000000000] left-0">
+          {data[0].options?.map((item) => {
+            return (
+              <a
+                href={`#${item.id}`}
+                key={item.id}
+                className={`border ${
+                  activeSection === item.id
+                    ? "bg-[#671ABF] text-white"
+                    : "bg-white"
+                } border-[#671ABF] uppercase p-1 px-2 ml-5 rounded-xl shodow-lg`}
+              >
+                {item.name}
+              </a>
+            );
+          })}
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="px-5 mx-5 flex items-center p-2  bg-gray-100 text-gray-400 rounded-xl">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +111,12 @@ const Restaurant = () => {
       </div>
       {data[0].options?.map((item) => {
         return (
-          <section key={item.id} className="mt-5">
+          <section
+            key={item.id}
+            ref={sectionRefs.current[item.id]}
+            className="mt-5"
+            id={item.id}
+          >
             <h2 className="ml-5 text-2xl capitalize mb-2 font-semibold">
               {item.name}
             </h2>

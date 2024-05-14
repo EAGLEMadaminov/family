@@ -17,7 +17,7 @@ const Restaurant = ({ data, styles, textStyle }) => {
       </div>
       <div className={`${textStyle} mt-3`}>
         <h2 className="text-xl font-bold">{data.name}</h2>
-        <ul className="flex">
+        <ul className="flex w-screen flex-wrap">
           {data.options.map((sub) => {
             return (
               <li

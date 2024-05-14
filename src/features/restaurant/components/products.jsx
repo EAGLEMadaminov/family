@@ -74,7 +74,7 @@ const Products = ({ data }) => {
   };
 
   return (
-    <div className="mx-5 flex justify-between flex-wrap">
+    <div className="mx-5 flex justify-between flex-wrap scroll-smooth">
       {data.map((product) => {
         const productState = productStates[product.id] || {};
         const { showPrice = false, count = 1 } = productState;
