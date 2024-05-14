@@ -6,7 +6,7 @@ import {
   HomePage,
   MenuPage,
   CartPage,
-  PurchasePage,
+  OrderPage,
   CommentsPage,
   RestaurantPage,
 } from "../../Pages";
@@ -35,8 +35,8 @@ export const router = createBrowserRouter([
         element: <MenuPage />,
       },
       {
-        path: "/purchase",
-        element: <PurchasePage />,
+        path: "/order",
+        element: <OrderPage />,
       },
       {
         path: "/comments",

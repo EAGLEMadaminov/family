@@ -17,7 +17,7 @@ const Header = () => {
   const { pathname } = usePathName();
 
   return (
-    <div className="flex justify-between items-center px-5 bg-[#671ABF] py-5">
+    <div className="flex justify-between z-[10] fixed top-0 w-full items-center px-5 bg-[#671ABF] py-5">
       {showConnect ? <ConnectPopup /> : ""}
       {pathname.includes("category") ? (
         <button

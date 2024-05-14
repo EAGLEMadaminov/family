@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
 import { manageConnect } from "../../../redux/slices/head";
+import Delivery from "../../../assets/delivery.avif";
 const Connect = () => {
   const dispatch = useDispatch();
   return (
-    <div className="absolute left-0 right-0 bottom-0 top-0 bg-white h-[100vh]">
+    <div className="absolute left-0 z-[100] right-0 bottom-0 top-0 bg-white h-[100vh]">
       <div className="bg-[#671ABF] py-5 flex text-white px-10 items-center">
         <button
           className="rounded-[50%] p-1 bg-gray-500 mr-10  "
@@ -24,11 +25,12 @@ const Connect = () => {
       </div>
       <div className="mt-5 text-center px-5 flex flex-col gap-3">
         <h2 className="text-xl  text-center font-semibold">Name </h2>
-        <p>Restoranlar va cafelar uchun onlayn service</p>
-        <h2 className="text-xl text-center font-semibold">
-          {" "}
-          Biz sizga yordam berishdan xursandmiz.
+        <img src={Delivery} alt="" className="h-[200px]  mx-auto" />
+        <h2 className="text-2xl font-semibold text-center">
+          Shahardagi eng tez yetkazib berish hizmati.
         </h2>
+        <p>Restoranlar va cafelar uchun onlayn service</p>
+
         <p>
           Biznesingizga online service hizmatlari qo’shmoqchimisiz . Unda biz
           bilan bog’laning.
