@@ -25,7 +25,7 @@ const Product = ({ data }) => {
           </svg>
         </button>
         <button
-          className="absolute right-[20px] text-2xl top-[10px]"
+          className="absolute right-[20px] bg-transparent text-2xl top-[10px]"
           onClick={() => setIsLiked(!isLiked)}
         >
           {isLiked ? "💚" : "🤍"}

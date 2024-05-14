@@ -40,7 +40,7 @@ const Header = () => {
         </button>
       ) : (
         <button
-          className="text-white"
+          className="text-white bg-transparent"
           onClick={() => dispatch(manageConnect(true))}
         >
           <svg

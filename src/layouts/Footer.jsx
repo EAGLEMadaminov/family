@@ -92,7 +92,7 @@ const Footer = () => {
         <span className="text-[12px]">Yoqtirilgan</span>
       </Link>
       <button
-        className="text-gray-500 cursor-pointer flex flex-col items-center justify-end h-[50px]"
+        className="text-gray-500 bg-transparent cursor-pointer flex flex-col items-center justify-end h-[50px]"
         onClick={() => dispatch(showAccount(true))}
       >
         <svg
