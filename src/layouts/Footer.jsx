@@ -10,7 +10,6 @@ const Footer = () => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
   const isChangeCount = useSelector((store) => store.footer.isChangeCount);
-
   useEffect(() => {
     let products = JSON.parse(localStorage.getItem("choosen"));
     products = Boolean(products) ? products : [];

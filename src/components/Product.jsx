@@ -1,11 +1,32 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { showSingleProduct } from "../redux/slices/product";
-
+import { checkCount } from "../redux/slices/footer";
 const Product = ({ data }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [count, setCount] = useState(1);
+  const isChangeCount = useSelector((store) => store.footer.isChangeCount);
   const dispatch = useDispatch();
+
+  const addToCartBtn = () => {
+    dispatch(checkCount(!isChangeCount));
+    let product = { ...data };
+    product.count = count;
+    let has = false;
+    let arr = JSON.parse(localStorage.getItem("choosen"));
+    arr = Boolean(arr) ? arr : [];
+    arr = arr.filter((element) => {
+      if (element.id == data.id) {
+        element.count = count;
+        has = true;
+      }
+      return element;
+    });
+    if (!has) {
+      arr.push(product);
+    }
+    localStorage.setItem("choosen", JSON.stringify(arr));
+  };
   return (
     <div className="fixed h-[80vh] bottom-0 left-0 right-0 bg-white">
       <div>
@@ -87,7 +108,10 @@ const Product = ({ data }) => {
             </svg>
           </button>
         </div>
-        <button className="w-[60%] bg-[#671ABF]  text-white p-2 rounded-2xl">
+        <button
+          className="w-[60%] bg-[#671ABF]  text-white p-2 rounded-2xl"
+          onClick={addToCartBtn}
+        >
           Savatga qo&apos;shish
         </button>
       </div>
