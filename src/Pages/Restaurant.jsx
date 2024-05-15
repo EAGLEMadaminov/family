@@ -56,7 +56,7 @@ const Restaurant = () => {
   };
 
   return (
-    <div className="my-[80px] w-[calc(screen-50px)]">
+    <div className="my-[80px] w-[100vw]">
       {data.map((one) => {
         return (
           <RestaurantComponent
