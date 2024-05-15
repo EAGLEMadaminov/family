@@ -85,7 +85,7 @@ const Footer = () => {
         <div
           ref={sliderRef}
           onClick={() => dispatch(showInformation({ id: id, show: true }))}
-          className="overflow-scroll justify-between ml-1 no-scrollbar flex gap-3 w-[55px]"
+          className="overflow-scroll bg-transparent justify-between ml-1 no-scrollbar flex gap-3 w-[55px]"
         >
           <button className="text-gray-500 cursor-pointer flex flex-col items-center justify-end">
             <svg
