@@ -84,10 +84,9 @@ const InformationPopup = ({ id }) => {
             />
           </svg> */}
           <img
-            src="https://icons.veryicon.com/png/o/business/time-management/calendar-337.png"
-            // src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png"
+            src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png"
             alt="instagram icon image"
-            className="w-[35px] h-[35px] bg-transparent"
+            className="w-[50px] h-[50px] bg-transparent"
           />
           <p className="ml-5 text-xl">Har kuni soat 8:00 dan 22:00 gacha</p>
         </div>
