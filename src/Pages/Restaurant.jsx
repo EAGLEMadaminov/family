@@ -35,7 +35,7 @@ const Restaurant = () => {
       if (
         ref &&
         ref.offsetTop + 230 <= scrollPosition &&
-        ref.offsetTop + ref.offsetHeight > scrollPosition-200
+        ref.offsetTop + ref.offsetHeight > scrollPosition - 200
       ) {
         newActiveSection = option.id;
       }
@@ -69,7 +69,7 @@ const Restaurant = () => {
       })}
 
       {showElement ? (
-        <div className="fixed top-[90px]  py-5 w-screen no-scrollbar snap-x snap-mandatory overflow-x-scroll z-[1000000000000000000] left-0">
+        <div className="fixed top-[85px]  py-5 w-screen no-scrollbar snap-x snap-mandatory overflow-x-scroll z-[1000000000000000000] left-0">
           {data[0].options?.map((item) => {
             return (
               <a
