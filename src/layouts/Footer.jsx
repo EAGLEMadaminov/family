@@ -87,7 +87,7 @@ const Footer = () => {
           onClick={() => dispatch(showInformation({ id: id, show: true }))}
           className="overflow-scroll bg-transparent justify-between ml-1 no-scrollbar flex gap-3 w-[55px]"
         >
-          <button className="text-gray-500 cursor-pointer flex flex-col items-center justify-end">
+          <button className="text-gray-500 bg-transparent cursor-pointer flex flex-col items-center justify-end">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="26"
@@ -100,7 +100,7 @@ const Footer = () => {
             </svg>
             <span className="text-[12px] mt-1">Ma&apos;lumot</span>
           </button>
-          <button className="text-gray-500 ml-1 cursor-pointer flex flex-col items-center justify-end">
+          <button className="text-gray-500 bg-transparent ml-1 cursor-pointer flex flex-col items-center justify-end">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="26"
@@ -116,7 +116,7 @@ const Footer = () => {
             </svg>
             <span className="text-[12px] mt-1">Bog&apos;lanish</span>
           </button>
-          <button className="text-gray-500 cursor-pointer flex flex-col items-center justify-end">
+          <button className="text-gray-500 bg-transparent cursor-pointer flex flex-col items-center justify-end">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="26"

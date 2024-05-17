@@ -157,7 +157,7 @@ const Product = ({ data: product }) => {
           alt="Food image"
         />
         <button
-          className="absolute right-[10px] bg-transparent top-[10px]"
+          className="absolute right-[10px] text-xl bg-transparent top-[10px]"
           onClick={() => handleLikeBtn(product)}
         >
           {isLiked ? "❤" : "🤍"}
