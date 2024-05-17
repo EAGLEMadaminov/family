@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { categories } from "../utils/Data";
-import RestaurantComponent from "../components/RestaurantComponent";
+import RestaurantComponent from "../components/RestaurantComponent.jsx";
 
-import Products from "../features/restaurant/components/Products";
+import Products from "../features/restaurant/components/Products.jsx";
 
 const Restaurant = () => {
   const [showElement, setShowElement] = useState(false);
