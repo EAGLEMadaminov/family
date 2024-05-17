@@ -106,7 +106,6 @@ const Product = ({ data: product }) => {
     if (checkLike) {
       arr = arr.filter((item) => item.id !== product.id);
       updatedProduct.isLiked = false;
-      console.log(arr);
       localStorage.setItem(value, JSON.stringify(arr));
     } else {
       updatedProduct.isLiked = true;
