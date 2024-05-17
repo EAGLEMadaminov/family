@@ -4,6 +4,7 @@ const initialState = {
   isOpenSingleProduct: false,
   selectedProduct: {},
   showHeadOptions: false,
+  isChangeLike: false,
 };
 
 const productSlice = createSlice({
@@ -19,9 +20,16 @@ const productSlice = createSlice({
     manageHeadOptions: (state, action) => {
       state.showHeadOptions = action.payload;
     },
+    checkLike: (state, action) => {
+      state.isChangeLike = action.payload;
+    },
   },
 });
 
-export const { showSingleProduct, getSelectedProduct, manageHeadOptions } =
-  productSlice.actions;
+export const {
+  showSingleProduct,
+  getSelectedProduct,
+  manageHeadOptions,
+  checkLike,
+} = productSlice.actions;
 export default productSlice.reducer;

@@ -1,82 +1,187 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showSingleProduct } from "../redux/slices/product";
 import { checkCount } from "../redux/slices/footer";
-const Product = ({ data }) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [count, setCount] = useState(1);
-  const isChangeCount = useSelector((store) => store.footer.isChangeCount);
+import {
+  getSelectedProduct,
+  showSingleProduct,
+  checkLike,
+} from "../redux/slices/product";
+
+const Product = ({ data: product }) => {
+  const [productStates, setProductStates] = useState({});
+  const countChange = useSelector((store) => store.footer.isChangeCount);
+  const productState = productStates[product.id] || {};
+  const { showPrice = false, count = 1, isLiked } = productState;
+  const isChangeLike = useSelector((store) => store.product.isChangeLike);
+
   const dispatch = useDispatch();
 
-  const addToCartBtn = () => {
-    dispatch(checkCount(!isChangeCount));
-    let product = { ...data };
-    product.count = count;
-    let has = false;
-    let arr = JSON.parse(localStorage.getItem("choosen"));
-    arr = Boolean(arr) ? arr : [];
-    arr = arr.filter((element) => {
-      if (element.id == data.id) {
-        element.count = count;
-        has = true;
+  const subsFunction = (array, product) => {
+    let changedCount = 0;
+    let newValue = array.map((item) => {
+      if (item.id === product.id && item.count > 1) {
+        item.count = item.count - 1;
+        changedCount = item.count;
       }
-      return element;
+      return item;
     });
-    if (!has) {
-      arr.push(product);
-    }
-    localStorage.setItem("choosen", JSON.stringify(arr));
+    updateProductState(product.id, { count: changedCount });
+    return newValue;
   };
-  return (
-    <div className="fixed h-[80vh] z-[10000000000] bottom-0 left-0 right-0 bg-white shadow-lg rounded-2xl border-t ">
-      <div className="flex my-3 relative justify-center">
-        <h2 className="text-2xl font-semibold  capitalize">
-          {data.title.slice(0, 20)}
-        </h2>
-        <button
-          onClick={() => dispatch(showSingleProduct(false))}
-          className=" p-1 absolute right-3 top-1 bg-gray-400 rounded-[50%]"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-x-lg"
-            viewBox="0 0 16 16"
-          >
-            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
-          </svg>
-        </button>
-      </div>
 
+  useEffect(() => {
+    let allLiked = JSON.parse(localStorage.getItem("likedList"));
+    allLiked = allLiked?.length > 0 ? allLiked : [];
+    allLiked.forEach((item) => {
+      if (item.id === product.id) {
+        product.isLiked = true;
+        updateProductState(product.id, { isLiked: true });
+      }
+    });
+  }, []);
+
+  const subsProductBtn = (product) => {
+    dispatch(checkCount(!countChange));
+    let values = JSON.parse(localStorage.getItem("choosen"));
+    let productCount = 0;
+    values.forEach((item) => {
+      if (item.id === product.id) {
+        productCount = item.count;
+      }
+    });
+
+    if (productCount <= 1) {
+      let newArr = values.filter((one) => one.id !== product.id);
+      localStorage.setItem("choosen", JSON.stringify(newArr));
+      updateProductState(product.id, { showPrice: false });
+    } else {
+      let arr = subsFunction(values, product);
+      localStorage.setItem("choosen", JSON.stringify(arr));
+    }
+  };
+
+  const addOneProductBtn = (product) => {
+    console.log(productState);
+    dispatch(checkCount(!countChange));
+    let productCount = 0;
+    let value = JSON.parse(localStorage.getItem("choosen"));
+    value = value.map((item) => {
+      if (item.id === product.id) {
+        item.count += 1;
+        productCount = item.count;
+      }
+      return item;
+    });
+    localStorage.setItem("choosen", JSON.stringify(value));
+    updateProductState(product.id, { count: productCount });
+  };
+
+  const addToCatrBtn = (product) => {
+    dispatch(checkCount(!countChange));
+    let oldValues = JSON.parse(localStorage.getItem("choosen"));
+    oldValues = Boolean(oldValues) ? oldValues : [];
+    oldValues.push(product);
+    localStorage.setItem("choosen", JSON.stringify(oldValues));
+    let updatedProduct = { ...product, showPrice: true, count: 1 };
+    updateProductState(product.id, updatedProduct);
+  };
+
+  const updateProductState = (productId, updatedValues) => {
+    setProductStates((prevState) => ({
+      ...prevState,
+      [productId]: { ...prevState[productId], ...updatedValues },
+    }));
+  };
+
+  const productLikeFunction = (product, value) => {
+    let oldValues = JSON.parse(localStorage.getItem(value));
+    let arr = oldValues ? oldValues : [];
+    let checkLike = false;
+    arr.forEach((item) => {
+      if (item.id === product.id) {
+        checkLike = true;
+      }
+    });
+    let updatedProduct = { ...product };
+    if (checkLike) {
+      arr = arr.filter((item) => item.id !== product.id);
+      updatedProduct.isLiked = false;
+      console.log(arr);
+      localStorage.setItem(value, JSON.stringify(arr));
+    } else {
+      updatedProduct.isLiked = true;
+      arr.push(product);
+      localStorage.setItem(value, JSON.stringify(arr));
+    }
+    updateProductState(product.id, updatedProduct);
+  };
+
+  const showWithTokenLike = async (product, token) => {
+    // try {
+    //   let { data } = await axiosIntance.post(
+    //     `/products/${product.id}/like/`,
+    //     null,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     }
+    //   );
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const handleLikeBtn = (product) => {
+    dispatch(checkLike(!isChangeLike));
+    let token = localStorage.getItem("access_token");
+    let value = "";
+    if (token) {
+      showWithTokenLike(product, token);
+      value = "userLikedList";
+    } else {
+      value = "likedList";
+    }
+    productLikeFunction(product, value);
+  };
+
+  return (
+    <div className="flex flex-col md:w-[45%] sm:w-[30%] my-3 " key={product.id}>
       <div className="relative">
         <img
-          src={data.image}
-          alt="product iamge"
-          className="mx-auto h-[200px] w-screen object-cover "
+          src={product.image}
+          onClick={() => {
+            dispatch(getSelectedProduct(product));
+            dispatch(showSingleProduct(true));
+          }}
+          className="h-[150px] w-[150px] rounded-xl object-cover product-shadow"
+          alt="Food image"
         />
         <button
-          className="absolute right-[20px] bg-transparent text-2xl bottom-[10px]"
-          onClick={() => setIsLiked(!isLiked)}
+          className="absolute right-[10px] bg-transparent top-[10px]"
+          onClick={() => handleLikeBtn(product)}
         >
-          {isLiked ? "💚" : "🤍"}
+          {isLiked ? "❤" : "🤍"}
         </button>
       </div>
-      <div className="flex justify-center px-5 mt-3 items-center flex-col ">
-        <div className="flex w-[130px] justify-between  p-2 rounded-xl">
-          <button
-            className="rounded-sm px-1 bg-[#a468e9]"
-            onClick={() => {
-              if (count > 1) {
-                setCount(count - 1);
-              }
-            }}
-          >
+      <h3 className="font-semibold text-[16px] capitalize ml-2 mb-0">
+        {product.title}
+      </h3>
+      {showPrice && (
+        <div>
+          <p className="text-[12px] flex flex-col mt-0 ml-2 font-bold text-[#222]">
+            {product.price} so&apos;m
+          </p>
+        </div>
+      )}
+
+      {showPrice && count >= 1 && (
+        <div className="flex justify-between items-center mt-2 px-5">
+          <button onClick={() => subsProductBtn(product)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
+              width="16"
+              height="16"
               fill="currentColor"
               className="bi bi-dash"
               viewBox="0 0 16 16"
@@ -85,37 +190,32 @@ const Product = ({ data }) => {
             </svg>
           </button>
           <p>{count}</p>
-          <button
-            className="rounded-sm  bg-[#a468e9]"
-            onClick={() => setCount(count + 1)}
-          >
+          <button onClick={() => addOneProductBtn(product)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="16"
+              height="16"
               fill="currentColor"
-              className="bi bi-plus"
+              className="bi bi-plus-lg"
               viewBox="0 0 16 16"
             >
-              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+              <path
+                fillRule="evenodd"
+                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
+              />
             </svg>
           </button>
         </div>
-        <p className="font-semibold text-xl">
-          {data.price.toLocaleString()} <sup>so&apos;m</sup>
-        </p>
-      </div>
-      <p className="px-5 mt-4 text-justify">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error ipsum
-        quam inventore id dolorem laboriosam tempora nostrum perspiciatis
-        necessitatibus ipsa?
-      </p>
-      <button
-        className="w-[60%] bg-[#671ABF] mx-auto flex justify-center mt-3 text-white p-2 rounded-2xl"
-        onClick={addToCartBtn}
-      >
-        Savatga qo&apos;shish
-      </button>
+      )}
+
+      {!showPrice && (
+        <button
+          className="p-1 px-3 w-[150px] mt-5 bg-gray-200 rounded-xl"
+          onClick={() => addToCatrBtn(product)}
+        >
+          {product.price} so&apos;m
+        </button>
+      )}
     </div>
   );
 };

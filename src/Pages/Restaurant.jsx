@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { categories } from "../utils/Data";
 import RestaurantComponent from "../components/RestaurantComponent";
 
-import Products from "../features/restaurant/components/products";
+import Products from "../features/restaurant/components/Products";
 
 const Restaurant = () => {
   const [showElement, setShowElement] = useState(false);

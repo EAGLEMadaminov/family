@@ -2,7 +2,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import { useSelector } from "react-redux";
 import Account from "./Account";
-import Product from "../components/Product";
+import Product from "../components/ProductPopup";
 import InformationPopup from "../components/InformationPopup";
 
 const DashboardLayouts = ({ children }) => {

@@ -86,6 +86,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-2",
@@ -94,6 +95,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-3",
@@ -102,6 +104,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-4",
@@ -110,6 +113,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-5",
@@ -118,6 +122,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-6",
@@ -126,6 +131,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-7",
@@ -134,6 +140,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -148,6 +155,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik2",
@@ -156,6 +164,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik3",
@@ -164,6 +173,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik4",
@@ -172,6 +182,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik5",
@@ -180,6 +191,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik6",
@@ -188,6 +200,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik7",
@@ -196,6 +209,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -210,6 +224,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Cola",
@@ -218,6 +233,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -226,6 +242,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Fanta",
@@ -234,6 +251,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -242,6 +260,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Fanta",
@@ -250,6 +269,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -258,6 +278,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -279,6 +300,8 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "sweet-2",
@@ -287,6 +310,8 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "sweet-3",
@@ -295,6 +320,8 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "sweet-4",
@@ -303,6 +330,8 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "sweet-5",
@@ -311,6 +340,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-6",
@@ -319,6 +349,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-7",
@@ -327,6 +358,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -341,6 +373,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik2",
@@ -349,6 +382,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik3",
@@ -357,6 +391,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik4",
@@ -365,6 +400,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik5",
@@ -373,6 +409,8 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik6",
@@ -381,6 +419,8 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik7",
@@ -389,6 +429,8 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
         ],
       },
@@ -403,6 +445,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Cola",
@@ -411,6 +454,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -419,6 +463,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Fanta",
@@ -427,6 +472,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -435,6 +481,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Fanta",
@@ -443,6 +490,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -451,6 +499,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -472,6 +521,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-2",
@@ -480,6 +530,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-3",
@@ -488,6 +539,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-4",
@@ -496,6 +548,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-5",
@@ -504,6 +557,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-6",
@@ -512,6 +566,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-7",
@@ -520,6 +575,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -534,6 +590,9 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik2",
@@ -542,6 +601,9 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik3",
@@ -550,6 +612,9 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik4",
@@ -558,6 +623,9 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik5",
@@ -566,6 +634,8 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik6",
@@ -574,6 +644,8 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik7",
@@ -582,6 +654,8 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
+            isLiked: false,
           },
         ],
       },
@@ -596,6 +670,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Cola",
@@ -604,6 +679,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -612,6 +688,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Fanta",
@@ -620,6 +697,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -628,6 +706,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Fanta",
@@ -636,6 +715,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -644,6 +724,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -665,6 +746,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-2",
@@ -673,6 +755,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-3",
@@ -681,6 +764,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-4",
@@ -689,6 +773,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-5",
@@ -697,6 +782,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-6",
@@ -705,6 +791,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "sweet-7",
@@ -713,6 +800,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -727,6 +815,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik2",
@@ -735,6 +824,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik3",
@@ -743,6 +833,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik4",
@@ -751,6 +842,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik5",
@@ -759,6 +851,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik6",
@@ -767,6 +860,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Shirinlik7",
@@ -775,6 +869,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
@@ -789,6 +884,7 @@ const categories = [
             id: 1,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Cola",
@@ -797,6 +893,7 @@ const categories = [
             id: 2,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -805,6 +902,7 @@ const categories = [
             id: 3,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Fanta",
@@ -813,6 +911,7 @@ const categories = [
             id: 4,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -821,6 +920,7 @@ const categories = [
             id: 5,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Fanta",
@@ -829,6 +929,7 @@ const categories = [
             id: 6,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
           {
             title: "Dena",
@@ -837,6 +938,7 @@ const categories = [
             id: 7,
             count: 1,
             showPrice: false,
+            isLiked: false,
           },
         ],
       },
