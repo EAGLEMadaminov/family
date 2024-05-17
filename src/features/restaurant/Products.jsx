@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Product from "../../../components/Product";
+import Product from "../../components/Product.jsx";
 import { useSelector } from "react-redux";
 
 const Products = ({ data }) => {
