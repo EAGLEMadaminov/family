@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import CartImage from "../assets/cart.jpg";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { checkCount } from "../redux/slices/footer";
+import { useEffect, useState } from 'react';
+import CartImage from '../assets/cart.jpg';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkCount } from '../redux/slices/footer';
 
 const Cart = () => {
-  let allData = JSON.parse(localStorage.getItem("choosen"));
+  let allData = JSON.parse(localStorage.getItem('choosen'));
   allData = Boolean(allData) ? allData : [];
   const [changeCount, setChangeCount] = useState(false);
-  const [allPrice, setAllPrice] = useState("");
+  const [allPrice, setAllPrice] = useState('');
   const [data, setData] = useState(allData);
   const dispatch = useDispatch();
   const isChangeCount = useSelector((store) => store.footer.isChangeCount);
@@ -17,7 +17,7 @@ const Cart = () => {
     let value = 0;
     if (allData.length > 0) {
       allData.forEach((element) => {
-        value += Number(element.price.replace(/\s/g, "")) * element.count;
+        value += Number(element.price.replace(/\s/g, '')) * element.count;
       });
     }
     setAllPrice(value);
@@ -28,7 +28,7 @@ const Cart = () => {
   const subsProductBtn = (product) => {
     dispatch(checkCount(!isChangeCount));
     setChangeCount(!changeCount);
-    let arr = JSON.parse(localStorage.getItem("choosen"));
+    let arr = JSON.parse(localStorage.getItem('choosen'));
     arr = Boolean(arr) ? arr : [];
     if (product.count > 1) {
       arr = arr.filter((one) => {
@@ -41,14 +41,14 @@ const Cart = () => {
     } else {
       arr = arr.filter((one) => one.id !== product.id);
     }
-    localStorage.setItem("choosen", JSON.stringify(arr));
+    localStorage.setItem('choosen', JSON.stringify(arr));
     setData(arr);
   };
 
   const addOneProductBtn = (item) => {
     dispatch(checkCount(!isChangeCount));
     setChangeCount(!changeCount);
-    let arr = JSON.parse(localStorage.getItem("choosen"));
+    let arr = JSON.parse(localStorage.getItem('choosen'));
     arr = Boolean(arr) ? arr : [];
     arr = arr.filter((one) => {
       if (item.id === one.id) {
@@ -57,16 +57,16 @@ const Cart = () => {
       return one;
     });
     setData(arr);
-    localStorage.setItem("choosen", JSON.stringify(arr));
+    localStorage.setItem('choosen', JSON.stringify(arr));
   };
   const handleClearCart = () => {
     dispatch(checkCount(!isChangeCount));
     setChangeCount(!changeCount);
-    localStorage.setItem("choosen", JSON.stringify([]));
+    localStorage.setItem('choosen', JSON.stringify([]));
     setData([]);
   };
   return (
-    <div className="mt-[170px] translate-y-[-100px]">
+    <div className="mt-[170px] md:w-[700px]  mx-auto translate-y-[-100px]">
       {data?.length > 0 ? (
         <div className="px-5">
           <div className="flex items-center justify-between">
@@ -94,7 +94,7 @@ const Cart = () => {
                     <img
                       src={item.image}
                       alt="product image"
-                      className="w-[90px] h-[90px] rounded-xl object-cover"
+                      className="w-[90px] md:w-[200px] md:h-[200px] h-[90px] rounded-xl object-cover"
                     />
                     <div className="flex flex-col ml-3">
                       <h2 className="text-xl font-semibold capitalize">
@@ -153,7 +153,7 @@ const Cart = () => {
           </div>
           <button
             className="mx-auto w-[60%] justify-center bg-[#671ABF] p-2 px-5 flex mt-4 rounded-3xl text-white"
-            onClick={() => navigate("/order")}
+            onClick={() => navigate('/order')}
           >
             Rasmiylashtirish
           </button>
@@ -177,7 +177,7 @@ const Cart = () => {
             ko&apos;rinadi.
           </p>
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate('/')}
             className="w-[80%] rounded-3xl mt-4 p-2 text-center text-white text-[18px] mx-auto bg-[#671ABF]"
           >
             Bosh sahifa

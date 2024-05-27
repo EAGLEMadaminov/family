@@ -1,14 +1,13 @@
-import { checkLang } from "../redux/slices/main";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { usePathName } from "../router/hooks/use-path-name";
-import { checkCommetsFunc, manageConnect } from "../redux/slices/head";
-import Comments from "../features/header/components/CommentsPopup";
-import { useNavigate } from "react-router-dom";
-import ConnectPopup from "../features/header/components/ConnectPopup";
+import { checkLang } from '../redux/slices/main';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { usePathName } from '../router/hooks/use-path-name';
+import { checkCommetsFunc, manageConnect } from '../redux/slices/head';
+import Comments from '../features/header/components/CommentsPopup';
+import { useNavigate } from 'react-router-dom';
+import ConnectPopup from '../features/header/components/ConnectPopup';
 
 const Header = () => {
-  const [showConnectPopup, setShowConnetPopup] = useState(false);
   const comments = useSelector((store) => store.head.showComments);
   const showConnect = useSelector((store) => store.head.showConnect);
 
@@ -17,11 +16,11 @@ const Header = () => {
   const { pathname } = usePathName();
 
   return (
-    <div className="flex justify-between z-[10] fixed top-0 w-full items-center px-5 bg-[#671ABF] py-5">
-      {showConnect ? <ConnectPopup /> : ""}
-      {pathname.includes("category") ? (
+    <div className="flex justify-between z-[10] fixed top-0 w-[100%] items-center px-5 bg-[#671ABF] py-5">
+      {showConnect ? <ConnectPopup /> : ''}
+      {pathname.includes('category') ? (
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate('/')}
           className="text-white p-2 bg-[#7E3CC9] rounded-lg"
         >
           <svg
@@ -59,7 +58,7 @@ const Header = () => {
         </button>
       )}
 
-      {pathname.includes("category") ? (
+      {pathname.includes('category') ? (
         <button
           className="flex items-center text-white gap-2 p-2 bg-[#7E3CC9] px-3 rounded-xl"
           onClick={() => dispatch(checkCommetsFunc(!comments))}
@@ -78,7 +77,7 @@ const Header = () => {
           5.0
         </button>
       ) : (
-        <p className="text-xl text-white" onClick={() => navigate("/")}>
+        <p className="text-xl text-white" onClick={() => navigate('/')}>
           Asosiy menu
         </p>
       )}
@@ -90,7 +89,7 @@ const Header = () => {
         <option value="ru">RU</option>
       </select>
 
-      {comments ? <Comments /> : ""}
+      {comments ? <Comments /> : ''}
     </div>
   );
 };

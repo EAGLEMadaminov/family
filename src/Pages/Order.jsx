@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import ReactInputMask from "react-input-mask";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import ReactInputMask from 'react-input-mask';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const Purchase = () => {
   const { register, handleSubmit } = useForm();
   const [isDelivery, setIsDelivery] = useState(false);
-  const [phoneVale, setPhoneValue] = useState("");
+  const [phoneVale, setPhoneValue] = useState('');
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [mapUrl, setMapUrl] = useState("");
+  const [mapUrl, setMapUrl] = useState('');
   const [clickCurrent, setClickCurrent] = useState(false);
 
   const formatChars = {
-    "-": "[0-9]",
+    '-': '[0-9]',
   };
   const handleGeolocationSuccess = (position) => {
     const { latitude, longitude } = position.coords;
@@ -21,7 +21,7 @@ const Purchase = () => {
   };
 
   const handleGeolocationError = (error) => {
-    console.error("Error getting geolocation:", error);
+    console.error('Error getting geolocation:', error);
   };
 
   const getCurrentLocation = () => {
@@ -32,7 +32,7 @@ const Purchase = () => {
         handleGeolocationError
       );
     } else {
-      console.error("Geolocation is not supported by this browser.");
+      console.error('Geolocation is not supported by this browser.');
     }
   };
   const handleMapClick = (event) => {
@@ -45,7 +45,7 @@ const Purchase = () => {
   };
 
   const handleOrderBtn = async (data) => {
-    data.phone_number = phoneVale.replace(/\s/g, "");
+    data.phone_number = phoneVale.replace(/\s/g, '');
     data.url = mapUrl;
     console.log(data);
   };
@@ -92,7 +92,7 @@ const Purchase = () => {
                   type="text"
                   required
                   id="street"
-                  {...register("street")}
+                  {...register('street')}
                   className="w-[250px] mr-5 text-[18px] border rounded-lg px-2 py-1 mt-2 border-border"
                 />
               </label>
@@ -104,7 +104,7 @@ const Purchase = () => {
                     type="number"
                     required
                     id="home"
-                    {...register("home_number")}
+                    {...register('home_number')}
                     className="w-[150px] text-[18px]  border rounded-lg px-2 py-1 mt-2 border-border"
                   />
                 </label>
@@ -113,7 +113,7 @@ const Purchase = () => {
                   <input
                     type="text"
                     id="office"
-                    {...register("office")}
+                    {...register('office')}
                     className="w-[150px]  mr-5 text-[18px] border rounded-lg px-2 py-1 mt-2 border-border"
                   />
                 </label>
@@ -124,7 +124,7 @@ const Purchase = () => {
                   <input
                     type="text"
                     id="way"
-                    {...register("entrance")}
+                    {...register('entrance')}
                     className="w-[150px] text-[18px]  border rounded-lg px-2 py-1 mt-2 border-border"
                   />
                 </label>
@@ -133,7 +133,7 @@ const Purchase = () => {
                   <input
                     type="number"
                     id="floor"
-                    {...register("floor")}
+                    {...register('floor')}
                     className="w-[150px] mr-5 text-[18px] border rounded-lg px-2 py-1 mt-2 border-border"
                   />
                 </label>
@@ -143,14 +143,14 @@ const Purchase = () => {
                 <input
                   type="number"
                   id="home_code"
-                  {...register("door_phone")}
+                  {...register('door_phone')}
                   className="w-[250px] text-[18px]  border rounded-lg px-2 py-1 mt-2 border-border"
                 />
               </label>
 
               <LoadScript googleMapsApiKey="AIzaSyCc0zUA5W0c5vo8EwCs_ousutxmJUo7dXo">
                 <GoogleMap
-                  mapContainerStyle={{ width: "100%", height: "400px" }}
+                  mapContainerStyle={{ width: '100%', height: '400px' }}
                   center={
                     clickCurrent
                       ? selectedLocation
@@ -161,7 +161,7 @@ const Purchase = () => {
                 >
                   {selectedLocation && <Marker position={selectedLocation} />}
                 </GoogleMap>
-                <button type="button" onClick={getCurrentLocation}>
+                <button type="button" className='border p-2 px-3 rounded-3xl' onClick={getCurrentLocation}>
                   Turgan joyni aniqlash
                 </button>
               </LoadScript>
@@ -184,7 +184,7 @@ const Purchase = () => {
                 type="text"
                 id="fName"
                 required
-                {...register("first_name")}
+                {...register('first_name')}
                 placeholder="Ismingizni kiriting"
                 className=" text-[18px] w-[250px] border rounded-lg px-2 py-1 mt-2 border-border"
               />
@@ -195,7 +195,7 @@ const Purchase = () => {
                 type="text"
                 id="LName"
                 required
-                {...register("last_name")}
+                {...register('last_name')}
                 placeholder="Familiyangizni kiriting"
                 className="mr-5 w-[250px] text-[18px] border rounded-lg px-2 py-1 mt-2 border-border"
               />
@@ -218,7 +218,7 @@ const Purchase = () => {
             <input
               type="text"
               id="comment"
-              {...register("comment")}
+              {...register('comment')}
               className="w-full mr-5 text-[18px] border rounded-lg px-2 py-1 mt-2 border-border"
             />
             <span className="text-[12px]">

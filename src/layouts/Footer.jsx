@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
-import RestaurantLogo from "../assets/fork.png";
-import { usePathName } from "./../router/hooks/use-path-name";
-import { showAccount, showInformation } from "../redux/slices/footer";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import RestaurantLogo from '../assets/fork.png';
+import { usePathName } from './../router/hooks/use-path-name';
+import { showAccount, showInformation } from '../redux/slices/footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const Footer = () => {
   const { pathname } = usePathName();
@@ -15,7 +15,7 @@ const Footer = () => {
   const [changeInterval, setChangeInterval] = useState(false);
   const sliderRef = useRef(null);
   useEffect(() => {
-    let products = JSON.parse(localStorage.getItem("choosen"));
+    let products = JSON.parse(localStorage.getItem('choosen'));
     products = Boolean(products) ? products : [];
     let value = 0;
     products.forEach((item) => {
@@ -46,7 +46,7 @@ const Footer = () => {
   }, [changeInterval]);
 
   return (
-    <div className="fixed bottom-0 flex px-5 items-end py-3 footer-shadow border-t w-full bg-white  justify-around">
+    <div className="fixed bottom-0 flex px-5 items-end py-3 footer-shadow border-t w-[100%] bg-white  justify-around">
       <Link
         to="/"
         className="text-gray-500 cursor-pointer flex flex-col items-center"
@@ -75,13 +75,13 @@ const Footer = () => {
         <span className="text-[12px] mt-1">Savat</span>
         <p
           className={`text-[10px] absolute bg-[#671ABF] ${
-            count > 0 ? "p-[2px] px-[6px]" : ""
+            count > 0 ? 'p-[2px] px-[6px]' : ''
           }  rounded-[50%] text-white right-[-6px] top-[-10px]`}
         >
-          {count > 0 ? count : ""}
+          {count > 0 ? count : ''}
         </p>
       </Link>
-      {pathname.includes("category") ? (
+      {pathname.includes('category') ? (
         <div
           ref={sliderRef}
           onClick={() => dispatch(showInformation({ id: id, show: true }))}
@@ -131,7 +131,7 @@ const Footer = () => {
           </button>
         </div>
       ) : (
-        ""
+        ''
       )}
 
       <Link

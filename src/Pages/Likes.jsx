@@ -1,25 +1,19 @@
-import { useState, useEffect } from "react";
-import Product from "../components/Product.jsx";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from 'react';
+import Product from '../components/Product.jsx';
+import { useSelector } from 'react-redux';
 
 const Likes = () => {
   const [allLiked, setAllLiked] = useState([]);
   const isChangeLike = useSelector((store) => store.product.isChangeLike);
   useEffect(() => {
-    let likedList = JSON.parse(localStorage.getItem("likedList"));
+    let likedList = JSON.parse(localStorage.getItem('likedList'));
     likedList = Boolean(likedList) ? likedList : [];
     setAllLiked(likedList);
   }, [isChangeLike]);
   return (
-    <div className="flex w-[full] px-5 mx-auto mt-10 gap-20 flex-wrap translate-y-[-100px]">
-      <div className="flex gap-5 mx-auto flex-wrap mt-[170px] ">
-        {allLiked.map((item) => {
-          return <Product data={item} key={item.id} />;
-        })}
-      </div>
-
+    <div className="flex w-screen px-5 mx-auto mt-10 gap-20 flex-wrap translate-y-[-100px]">
       {allLiked?.length === 0 ? (
-        <div className="mx-auto text-center mt-20 ">
+        <div className="mx-auto text-center mt-20 md:mt-[200px] flex flex-col ">
           <img
             src="https://pngimg.com/d/like_PNG14.png"
             alt=" like image "
@@ -34,7 +28,11 @@ const Likes = () => {
           </p>
         </div>
       ) : (
-        ""
+        <div className="flex gap-5 mx-auto flex-wrap mt-[170px] ">
+          {allLiked.map((item) => {
+            return <Product data={item} key={item.id} />;
+          })}
+        </div>
       )}
     </div>
   );

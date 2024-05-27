@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
-import { manageConnect } from "../../../redux/slices/head";
-import Delivery from "../../../assets/delivery.avif";
+import { useDispatch } from 'react-redux';
+import { manageConnect } from '../../../redux/slices/head';
+import Delivery from '../../../assets/delivery.avif';
 const Connect = () => {
   const dispatch = useDispatch();
   return (
@@ -35,10 +35,10 @@ const Connect = () => {
           Biznesingizga online service hizmatlari qo’shmoqchimisiz . Unda biz
           bilan bog’laning.
         </p>
-        <div className="flex px-2 justify-between">
+        <div className="flex px-2 gap-3 justify-center md:w-[500px] mx-auto ">
           <a
             href="https://t.me/FLY_EAGLE_99"
-            className="flex items-center text-blue-700 text-center  mx-auto"
+            className="flex items-center text-blue-700 text-center "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 import DashboardLayouts from "../../layouts/DashboardLayouts";
 import {
   HomePage,
-  MenuPage,
   CartPage,
   OrderPage,
   CommentsPage,
@@ -31,10 +30,7 @@ export const router = createBrowserRouter([
         path: "/cart",
         element: <CartPage />,
       },
-      {
-        path: "/menu",
-        element: <MenuPage />,
-      },
+
       {
         path: "/order",
         element: <OrderPage />,
