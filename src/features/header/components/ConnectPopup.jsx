@@ -7,7 +7,7 @@ const Connect = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   return (
-    <div className="absolute  connect-animation text-white left-0 z-[100] right-0 bottom-0 top-0 bg-gray-500 h-[100vh]">
+    <div className="absolute connect-an left-0 z-[100] right-0 bottom-0 top-0 bg-white h-[100vh]">
       <div className="bg-[#671ABF] py-5 flex text-white px-10 items-center">
         <button
           className="rounded-[50%] p-1 bg-gray-500 mr-10  "
@@ -28,16 +28,7 @@ const Connect = () => {
       </div>
       <div className="mt-5 text-center px-5 flex flex-col gap-3">
         <h2 className="text-xl  text-center font-semibold">Name </h2>
-        <div className="loop-wrapper">
-          <div className="mountain"></div>
-          <div className="hill"></div>
-          <div className="tree"></div>
-          <div className="tree"></div>
-          <div className="tree"></div>
-          <div className="rock"></div>
-          <div className="truck"></div>
-          <div className="wheels"></div>
-        </div>
+        <img src={Delivery} alt="" className="h-[200px]  mx-auto" />
         <h2 className="text-2xl font-semibold text-center">
           {t('connect.fast_delivery')}
         </h2>
