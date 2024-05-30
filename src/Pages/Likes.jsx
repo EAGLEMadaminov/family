@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Product from '../components/Product.jsx';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const Likes = () => {
   const [allLiked, setAllLiked] = useState([]);
@@ -10,6 +11,7 @@ const Likes = () => {
     likedList = Boolean(likedList) ? likedList : [];
     setAllLiked(likedList);
   }, [isChangeLike]);
+  const { t } = useTranslation();
   return (
     <div className="flex w-screen px-5 mx-auto mt-10 gap-20 flex-wrap translate-y-[-100px]">
       {allLiked?.length === 0 ? (
@@ -19,13 +21,8 @@ const Likes = () => {
             alt=" like image "
             className="w-[100px] h-[100px] mx-auto"
           />
-          <h3 className="text-xl mt-5 font-semibold">
-            Sizga yoqqanini qoʻshing
-          </h3>
-          <p className="text-[14px] mt-3">
-            Mahsulotdagi ♡ belgisini bosing. Akkauntga kiring va barcha
-            saralanganlar saqlanib qoladi
-          </p>
+          <h3 className="text-xl mt-5 font-semibold">{t('like.add_like')}</h3>
+          <p className="text-[14px] mt-3">{t('like.info')}</p>
         </div>
       ) : (
         <div className="flex gap-5 mx-auto flex-wrap mt-[170px] ">

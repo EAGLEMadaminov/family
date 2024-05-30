@@ -1,20 +1,37 @@
 import { checkLang } from '../redux/slices/main';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import { usePathName } from '../router/hooks/use-path-name';
 import { checkCommetsFunc, manageConnect } from '../redux/slices/head';
 import Comments from '../features/header/components/CommentsPopup';
 import { useNavigate } from 'react-router-dom';
 import ConnectPopup from '../features/header/components/ConnectPopup';
+import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
   const comments = useSelector((store) => store.head.showComments);
   const showConnect = useSelector((store) => store.head.showConnect);
+  const isChangeLang = useSelector((store) => store.main.lang);
+  const { t, i18n } = useTranslation();
+  const [selectedLang, setSelectedLang] = useState(
+    localStorage.getItem('lang') || 'uz'
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = usePathName();
 
+  useEffect(() => {
+    localStorage.setItem('lang', selectedLang);
+    i18n.changeLanguage(selectedLang);
+  }, [selectedLang, isChangeLang]);
+
+  const handleChangeLangBtn = (e) => {
+    let value = e.target.value;
+    dispatch(checkLang(value));
+    setSelectedLang(value);
+    i18n.changeLanguage(value);
+  };
   return (
     <div className="flex justify-between z-[10] fixed top-0 w-[100%] items-center px-5 bg-[#671ABF] py-5">
       {showConnect ? <ConnectPopup /> : ''}
@@ -63,7 +80,8 @@ const Header = () => {
           className="flex items-center text-white gap-2 p-2 bg-[#7E3CC9] px-3 rounded-xl"
           onClick={() => dispatch(checkCommetsFunc(!comments))}
         >
-          Izoh <span className="h-[14px] w-[1px] mx-2 bg-white block"></span>
+          {t('header.comment')}{' '}
+          <span className="h-[14px] w-[1px] mx-2 bg-white block"></span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -78,12 +96,13 @@ const Header = () => {
         </button>
       ) : (
         <p className="text-xl text-white" onClick={() => navigate('/')}>
-          Asosiy menu
+          {t('header.header_text')}
         </p>
       )}
       <select
         className="p-2 rounded-lg outline-none  appearance-none px-3 bg-[#7E3CC9] text-white tracking-tight"
-        onChange={(e) => dispatch(checkLang(e.target.value))}
+        onChange={(e) => handleChangeLangBtn(e)}
+        value={selectedLang}
       >
         <option value="uz">UZ</option>
         <option value="ru">RU</option>

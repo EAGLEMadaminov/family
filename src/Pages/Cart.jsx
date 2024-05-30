@@ -3,6 +3,7 @@ import CartImage from '../assets/cart.jpg';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkCount } from '../redux/slices/footer';
+import { useTranslation } from 'react-i18next';
 
 const Cart = () => {
   let allData = JSON.parse(localStorage.getItem('choosen'));
@@ -12,6 +13,7 @@ const Cart = () => {
   const [data, setData] = useState(allData);
   const dispatch = useDispatch();
   const isChangeCount = useSelector((store) => store.footer.isChangeCount);
+  const { t } = useTranslation();
 
   useEffect(() => {
     let value = 0;
@@ -71,7 +73,7 @@ const Cart = () => {
         <div className="px-5">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-center mt-5 w-[90%] ">
-              Savat
+              {t('basket.basket')}
             </h2>
             <button className="mt-5 text-[#671ABF]" onClick={handleClearCart}>
               <svg
@@ -144,43 +146,40 @@ const Cart = () => {
             );
           })}
           <div className="flex justify-between mt-5">
-            <h3 className="font-semibold">Yetkazib berish</h3>
-            <p className="text-[#671ABF] font-semibold">bepul</p>
+            <h3 className="font-semibold">{t('basket.delivery')}</h3>
+            <p className="text-[#671ABF] font-semibold">{t('basket.free')}</p>
           </div>
           <div className="flex justify-between mt-5">
-            <h3 className="text-[18px] font-semibold">Jami</h3>
-            <p className="">{allPrice.toLocaleString()} so&apos;m</p>
+            <h3 className="text-[18px] font-semibold">{t('basket.all')}</h3>
+            <p className="">
+              {allPrice.toLocaleString()} {t('price')}
+            </p>
           </div>
           <button
             className="mx-auto w-[60%] justify-center bg-[#671ABF] p-2 px-5 flex mt-4 rounded-3xl text-white"
             onClick={() => navigate('/order')}
           >
-            Rasmiylashtirish
+            {t('basket.order')}
           </button>
         </div>
       ) : (
         <div className="mt-10 text-center">
           <h2 className="text-2xl mt-[180px] text-center font-semibold">
-            Savat
+            {t('basket.basket')}
           </h2>
           <img
             src={CartImage}
             alt=""
             className="w-[200px] h-[180px] mx-auto object-cover"
           />
-          <h2 className="text-xl font-semibold ">
-            Bu yerda hech narsa yo&apos;q.
-          </h2>
+          <h2 className="text-xl font-semibold ">{t('basket.empty')}</h2>
 
-          <p>
-            Sizga yoqqan taomni buyurtmaga qo&apos;shganingizda, u bu yerda
-            ko&apos;rinadi.
-          </p>
+          <p>{t('basket.add_to_see')}</p>
           <button
             onClick={() => navigate('/')}
             className="w-[80%] rounded-3xl mt-4 p-2 text-center text-white text-[18px] mx-auto bg-[#671ABF]"
           >
-            Bosh sahifa
+            {t('basket.button')}
           </button>
         </div>
       )}

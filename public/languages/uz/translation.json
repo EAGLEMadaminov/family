@@ -1,0 +1,79 @@
+{
+  "restaurants": "Restaurantlar",
+  "price": "so'm",
+  "add_to_cart": "Savatga qo'shish",
+  "header": {
+    "header_text": "Asosiy menu",
+    "comment": "Izoh"
+  },
+  "connect": {
+    "fast_delivery": "Shahardagi eng tez yetkazib berish hizmati.",
+    "service": "Restoranlar va cafelar uchun onlayn service",
+    "connect_to_we": "Biznesingizga online service hizmatlari qo’shmoqchimisiz . Unda biz bilan bog’laning."
+  },
+  "footer": {
+    "basket": "Savat",
+    "like": "Yoqtirilgan",
+    "account": "Account",
+    "info": "Ma'lumot",
+    "connect": "Bog'lanish",
+    "instagram": "Instagram"
+  },
+  "basket": {
+    "basket": "Savat",
+    "empty": "Bu yerda hech narsa yo'q",
+    "add_to_see": "Sizga yoqqan taomni buyurtmaga qo'shganingizda, u bu yerda ko'rinadi.",
+    "button": "Bosh sahifa",
+    "delivery": "Yetkazib berish",
+    "free": "bepul",
+    "all": "Jami",
+    "order": "Rasmiylashtirish"
+  },
+  "like": {
+    "add_like": "Sizga yoqqanini qoʻshing",
+    "info": "Mahsulotdagi ♡ belgisini bosing. Akkauntga kiring va barcha saralanganlar saqlanib qoladi."
+  },
+  "order": {
+    "give_order": "Buyurtmani rasmiylashtirish",
+    "pick_up": "Olib ketish",
+    "delevery": "Yetkazib berish",
+    "home_address": "Olib ketish manzili",
+    "save_date": "Saqlash muddati 2 kun",
+    "person_info": "Buyurtma qabul qiluvchi:",
+    "name": "Ism",
+    "name_input": "Ismingizni kiriting",
+    "last_name": "Familiya",
+    "last_name_input": "Familiyangizni kiriting",
+    "phone": "Telefon raqam",
+    "comment": "Buyurtma uchun izoh",
+    "description": "Masalan yetkazishning aniq manzili, eng yaqin manzil yoki moʻljal",
+    "order_btn": "Buyurtma qilish",
+    "street": "Ko'cha",
+    "home": "Uy",
+    "home_mini": "uy raqamini kiriting",
+    "office": "Xonadon/office",
+    "way": "Yo'lak",
+    "floor": "Qavat",
+    "phone_code": "Domofon kodi",
+    "current_location": "Turgan joyini aniqlash"
+  },
+  "account": {
+    "account": "Account",
+    "now_you": "Sizda hozzircha",
+    "no_account": "account yo'q",
+    "new_open": "Account ochish uchun registratsiya tugmasini bosing.",
+    "registr_btn": "Registratsiya",
+    "agree": "Tasdiqlash",
+    "uzbek_sum": "Uzbek so'mi",
+    "log_out": "Accountdan chiqish",
+    "please_enter": "Iltimos ismingiz va raqamingizni kiriting.",
+    "send_code": "Biz sizning raqamingizga code yubordik. Uni kiriting."
+  },
+  "comment": {
+    "comment": "Izoh",
+    "detail": "Batafsil",
+    "see_all": "Barchasini ko'rish",
+    "comment_btn": "Izoh qoldirish",
+    "hide": "Yashirish"
+  }
+}

@@ -1,19 +1,22 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { showSingleProduct } from "../redux/slices/product";
-import { checkCount } from "../redux/slices/footer";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { showSingleProduct } from '../redux/slices/product';
+import { checkCount } from '../redux/slices/footer';
+import { useTranslation } from 'react-i18next';
+
 const Product = ({ data }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [count, setCount] = useState(1);
   const isChangeCount = useSelector((store) => store.footer.isChangeCount);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const addToCartBtn = () => {
     dispatch(checkCount(!isChangeCount));
     let product = { ...data };
     product.count = count;
     let has = false;
-    let arr = JSON.parse(localStorage.getItem("choosen"));
+    let arr = JSON.parse(localStorage.getItem('choosen'));
     arr = Boolean(arr) ? arr : [];
     arr = arr.filter((element) => {
       if (element.id == data.id) {
@@ -25,7 +28,7 @@ const Product = ({ data }) => {
     if (!has) {
       arr.push(product);
     }
-    localStorage.setItem("choosen", JSON.stringify(arr));
+    localStorage.setItem('choosen', JSON.stringify(arr));
   };
   return (
     <div className="fixed h-[80vh] z-[10000000000] bottom-0 left-0 right-0 bg-white shadow-lg rounded-2xl border-t ">
@@ -60,7 +63,7 @@ const Product = ({ data }) => {
           className="absolute right-[20px] bg-transparent text-2xl bottom-[10px]"
           onClick={() => setIsLiked(!isLiked)}
         >
-          {isLiked ? "❤" : "🤍"}
+          {isLiked ? '❤' : '🤍'}
         </button>
       </div>
       <div className="flex justify-center px-5 mt-3 items-center flex-col ">
@@ -102,7 +105,7 @@ const Product = ({ data }) => {
           </button>
         </div>
         <p className="font-semibold text-xl">
-          {data.price.toLocaleString()} <sup>so&apos;m</sup>
+          {data.price.toLocaleString()} <sup>{t("price")}</sup>
         </p>
       </div>
       <p className="px-5 mt-4 text-justify">
@@ -114,7 +117,7 @@ const Product = ({ data }) => {
         className="w-[60%] bg-[#671ABF] mx-auto flex justify-center mt-3 text-white p-2 rounded-2xl"
         onClick={addToCartBtn}
       >
-        Savatga qo&apos;shish
+        {t('add_to_cart')}
       </button>
     </div>
   );

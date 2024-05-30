@@ -1,13 +1,15 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { checkCommetsFunc } from "../../../redux/slices/head";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkCommetsFunc } from '../../../redux/slices/head';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Comments = () => {
   const navigate = useNavigate();
   const [showStarsPercentage, setShowStarsPersantage] = useState(false);
   const showComment = useSelector((store) => store.head.showComments);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   return (
     <div className="bg-white border-t  z-[10] rounded-t-2xl w-full p-4 top-[70px] absolute left-0 right-0">
       <div className="relative">
@@ -28,24 +30,26 @@ const Comments = () => {
         </button>
         <span className="w-full block h-[1px] top-14 bg-gray-500 absolute left-0"></span>
       </div>
-      <h2 className="text-xl font-bold text-center mt-10">Izoh</h2>
+      <h2 className="text-xl font-bold text-center mt-10">
+        {t('header.comment')}
+      </h2>
       <div className="border px-10 py-5 my-4 text-center rounded">
         <div className="flex mx-auto justify-center gap-4 w-full">
           <h3 className="text-xl font-semibold">0.0</h3> <span>⭐⭐⭐⭐⭐</span>
           {showStarsPercentage ? (
             <button className="" onClick={() => setShowStarsPersantage(false)}>
-              Yashirish
+              {t('comment.hide')}
             </button>
           ) : (
             <button onClick={() => setShowStarsPersantage(true)}>
-              Batafsil ..
+              {t('comment.detail')} ..
             </button>
           )}
         </div>
         {showStarsPercentage ? (
           <div className="flex flex-col mt-5">
             <div className="flex items-center justify-between gap-2">
-              <p>5</p> ⭐{" "}
+              <p>5</p> ⭐{' '}
               <div className=" h-1 w-full bg-neutral-100 dark:bg-neutral-300">
                 <div
                   className="h-1 bg-[#671ABF]"
@@ -55,7 +59,7 @@ const Comments = () => {
               <p>65%</p>
             </div>
             <div className="flex items-center justify-between gap-2">
-              <p>4</p> ⭐{" "}
+              <p>4</p> ⭐{' '}
               <div className=" h-1 w-full bg-neutral-100 dark:bg-neutral-300">
                 <div
                   className="h-1 bg-[#671ABF]"
@@ -65,7 +69,7 @@ const Comments = () => {
               <p>15%</p>
             </div>
             <div className="flex items-center justify-between gap-2">
-              <p>3</p> ⭐{" "}
+              <p>3</p> ⭐{' '}
               <div className=" h-1 w-full bg-neutral-100 dark:bg-neutral-300">
                 <div
                   className="h-1 bg-[#671ABF]"
@@ -75,7 +79,7 @@ const Comments = () => {
               <p>10%</p>
             </div>
             <div className="flex items-center justify-between gap-2">
-              <p>2</p> ⭐{" "}
+              <p>2</p> ⭐{' '}
               <div className=" h-1 w-full bg-neutral-100 dark:bg-neutral-300">
                 <div
                   className="h-1 bg-[#671ABF]"
@@ -85,7 +89,7 @@ const Comments = () => {
               <p>25%</p>
             </div>
             <div className="flex items-center justify-between gap-2">
-              <p>1</p> ⭐{" "}
+              <p>1</p> ⭐{' '}
               <div className=" h-1 w-full bg-neutral-100 dark:bg-neutral-300">
                 <div
                   className="h-1 bg-[#671ABF]"
@@ -96,10 +100,10 @@ const Comments = () => {
             </div>
           </div>
         ) : (
-          ""
+          ''
         )}
         <button className="rounded-3xl w-[100%] mt-5 bg-[#671ABF] text-white text-2xl mx-auto p-3 px-5">
-          Izoh qoldirish
+          {t('comment.comment_btn')}
         </button>
       </div>
 
@@ -136,11 +140,11 @@ const Comments = () => {
       <button
         className="border border-[#7936C7] rounded-3xl text-[#7936C7] p-4 flex my-10 w-[100%] justify-center  mx-auto text-xl font-semibold"
         onClick={() => {
-          navigate("/comments");
+          navigate('/comments');
           dispatch(checkCommetsFunc(false));
         }}
       >
-        Barchasini ko&apos;rish
+        {t('comment.see_all')}
       </button>
     </div>
   );

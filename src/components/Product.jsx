@@ -6,6 +6,7 @@ import {
   showSingleProduct,
   checkLike,
 } from '../redux/slices/product';
+import { useTranslation } from 'react-i18next';
 
 const Product = ({ data: product }) => {
   const [productStates, setProductStates] = useState({});
@@ -13,6 +14,7 @@ const Product = ({ data: product }) => {
   const productState = productStates[product.id] || {};
   const { showPrice = false, count = 1, isLiked } = productState;
   const isChangeLike = useSelector((store) => store.product.isChangeLike);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -145,7 +147,10 @@ const Product = ({ data: product }) => {
   };
 
   return (
-    <div className="flex flex-col md:w-[20%] md:mx-5 sm:w-[30%] my-3 " key={product.id}>
+    <div
+      className="flex flex-col md:w-[20%] md:mx-5 sm:w-[30%] my-3 "
+      key={product.id}
+    >
       <div className="relative">
         <img
           src={product.image}
@@ -169,7 +174,7 @@ const Product = ({ data: product }) => {
       {showPrice && (
         <div>
           <p className="text-[12px] flex flex-col mt-0 ml-2 font-bold text-[#222]">
-            {product.price} so&apos;m
+            {product.price} {t('price')}
           </p>
         </div>
       )}
@@ -212,7 +217,7 @@ const Product = ({ data: product }) => {
           className="p-1 px-3 w-[150px] mt-5 bg-gray-200 rounded-xl"
           onClick={() => addToCatrBtn(product)}
         >
-          {product.price} so&apos;m
+          {product.price} {t("price")}
         </button>
       )}
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { useTranslation } from 'react-i18next';
 
 const Purchase = () => {
   const { register, handleSubmit } = useForm();
@@ -10,6 +11,7 @@ const Purchase = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [mapUrl, setMapUrl] = useState('');
   const [clickCurrent, setClickCurrent] = useState(false);
+  const { t } = useTranslation();
 
   const formatChars = {
     '-': '[0-9]',
@@ -53,7 +55,7 @@ const Purchase = () => {
   return (
     <div className="mt-[200px]  translate-y-[-100px]">
       <h2 className="text-xl text-center font-semibold">
-        Yetkazib berish manzili:
+        {t('order.give_order')}
       </h2>
       <div className="mt-4 px-5">
         <label htmlFor="market" name="delivery" className="flex items-center">
@@ -65,7 +67,7 @@ const Purchase = () => {
             defaultChecked={true}
             onClick={(e) => setIsDelivery(!e.target.checked)}
           />
-          Olib ketish
+          {t('order.pick_up')}
         </label>
         <label
           htmlFor="delivery_home"
@@ -79,7 +81,7 @@ const Purchase = () => {
             className="mr-3"
             onClick={(e) => setIsDelivery(e.target.checked)}
           />
-          Yetkazib berish
+          {t('order.delevery')}
         </label>
       </div>
       <form action="" onSubmit={handleSubmit(handleOrderBtn)}>
@@ -87,7 +89,7 @@ const Purchase = () => {
           {isDelivery ? (
             <div className="w-[280px] md:w-[700px] gap-5 mt-3 flex text-[18px]  flex-col">
               <label htmlFor="street" className="mr-5">
-                Ko&apos;cha *
+                {t('order.street')} *
                 <input
                   type="text"
                   required
@@ -98,8 +100,8 @@ const Purchase = () => {
               </label>
               <div className="flex items-end">
                 <label htmlFor="home" className="mt-2">
-                  Uy *
-                  <span className="text-[12px]"> (uy raqamini kiriting)</span>
+                  {t('order.home')} *
+                  <span className="text-[12px]"> ({t('order.home_mini')})</span>
                   <input
                     type="number"
                     required
@@ -109,7 +111,7 @@ const Purchase = () => {
                   />
                 </label>
                 <label htmlFor="office" className="ml-4">
-                  Xonadon/office
+                  {t('order.office')}
                   <input
                     type="text"
                     id="office"
@@ -120,7 +122,7 @@ const Purchase = () => {
               </div>
               <div className="flex">
                 <label htmlFor="entrance" className="">
-                  Yo&apos;lak
+                  {t('order.way')}
                   <input
                     type="text"
                     id="way"
@@ -129,7 +131,7 @@ const Purchase = () => {
                   />
                 </label>
                 <label htmlFor="floor" className="ml-5">
-                  Qavat
+                  {t('order.floor')}
                   <input
                     type="number"
                     id="floor"
@@ -139,7 +141,7 @@ const Purchase = () => {
                 </label>
               </div>
               <label htmlFor="home_code" className="">
-                Domofon kodi
+                {t('order.phone_code')}
                 <input
                   type="number"
                   id="home_code"
@@ -161,48 +163,54 @@ const Purchase = () => {
                 >
                   {selectedLocation && <Marker position={selectedLocation} />}
                 </GoogleMap>
-                <button type="button" className='border p-2 px-3 rounded-3xl' onClick={getCurrentLocation}>
-                  Turgan joyni aniqlash
+                <button
+                  type="button"
+                  className="border p-2 px-3 rounded-3xl"
+                  onClick={getCurrentLocation}
+                >
+                  {t('order.current_location')}
                 </button>
               </LoadScript>
             </div>
           ) : (
             <div className="mt-5">
-              <h2 className="text-xl font-semibold">Do&apos;kon manzili</h2>
+              <h2 className="text-xl font-semibold">
+                {t('order.home_address')}
+              </h2>
               <p>Serob MFY O&apos;zbekiston N54</p>
-              <span className="text-[14px] ">Saqlash muddati 2 kun</span>
+              <span className="text-[14px] ">{t('order.save_date')}</span>
             </div>
           )}
 
           <h2 className="text-xl mt-5 font-semibold">
-            Buyurtma qabul qiluvchi:
+            {t('order.person_info')}
           </h2>
           <div className="flex my-5 flex-col">
             <label htmlFor="fName" className="flex flex-col">
-              Ism *
+              {t('order.name')} *
               <input
                 type="text"
                 id="fName"
                 required
                 {...register('first_name')}
-                placeholder="Ismingizni kiriting"
+                placeholder={t('order.name_input')}
                 className=" text-[18px] w-[250px] border rounded-lg px-2 py-1 mt-2 border-border"
               />
             </label>
             <label htmlFor="LName" className="mt-5 flex flex-col">
-              Familiya *
+              {t('order.last_name')} *
               <input
                 type="text"
                 id="LName"
                 required
                 {...register('last_name')}
-                placeholder="Familiyangizni kiriting"
+                placeholder={t('order.last_name_input')}
                 className="mr-5 w-[250px] text-[18px] border rounded-lg px-2 py-1 mt-2 border-border"
               />
             </label>
           </div>
           <label htmlFor="phone">
-            Telefon raqam*
+            {t('order.phone')} *
             <ReactInputMask
               formatChars={formatChars}
               mask="+998 -- --- -- --"
@@ -214,23 +222,21 @@ const Purchase = () => {
             />
           </label>
           <label htmlFor="comment" className="mt-5">
-            Buyurtma uchun izoh
+            {t('order.comment')}
             <input
               type="text"
               id="comment"
               {...register('comment')}
               className="w-full mr-5 text-[18px] border rounded-lg px-2 py-1 mt-2 border-border"
             />
-            <span className="text-[12px]">
-              Masalan yetkazishning aniq manzili, eng yaqin manzil yoki moʻljal
-            </span>
+            <span className="text-[12px]">{t('order.description')}</span>
           </label>
         </div>
         <button
           type="submit"
           className="mx-auto w-[60%] justify-center bg-[#671ABF] p-2 px-5 flex mt-4 rounded-3xl text-white"
         >
-          Buyurtma qilish
+          {t('order.order_btn')}
         </button>
       </form>
     </div>
