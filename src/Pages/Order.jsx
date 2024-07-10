@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
+import sendMessage from '../components/sendMessage';
+import { CHAT_ID, TGBOT_TOKEN } from '../utils/constants';
 
 const Purchase = () => {
   const { register, handleSubmit } = useForm();
@@ -12,6 +14,7 @@ const Purchase = () => {
   const [mapUrl, setMapUrl] = useState('');
   const [clickCurrent, setClickCurrent] = useState(false);
   const { t } = useTranslation();
+  const token = localStorage.getItem('access_token');
 
   const formatChars = {
     '-': '[0-9]',
@@ -43,13 +46,37 @@ const Purchase = () => {
       lng: event.latLng.lng(),
     });
     const url = `https://www.google.com/maps/@${event.latLng.lat()},${event.latLng.lng()},${15}z`;
+    console.log(url);
     setMapUrl(url);
   };
 
   const handleOrderBtn = async (data) => {
     data.phone_number = phoneVale.replace(/\s/g, '');
-    data.url = mapUrl;
+    let message = '';
+    console.log(mapUrl);
+    if (mapUrl) {
+      data.url = mapUrl;
+    }
     console.log(data);
+    if (isDelivery) {
+      message = `Ism: ${data.first_name}
+       Familiya: ${data.last_name}
+       Raqam: ${data.phone_number}
+       Izoh: ${data.comment}
+       Uy raqami: ${data.home_number}
+       Ko'cha nomi: ${data.street}
+       Damafone kodi: ${data.door_phone}`;
+    } else {
+      message = `Ism: ${data.first_name}
+      Familiya: ${data.last_name}
+      Raqam: ${data.phone_number}
+      Izoh: ${data.comment}`;
+    }
+
+    console.log(message, CHAT_ID, TGBOT_TOKEN);
+    if (token) {
+      sendMessage(CHAT_ID, message, TGBOT_TOKEN);
+    }
   };
 
   return (
@@ -150,7 +177,7 @@ const Purchase = () => {
                 />
               </label>
 
-              <LoadScript googleMapsApiKey="AIzaSyCc0zUA5W0c5vo8EwCs_ousutxmJUo7dXo">
+              <LoadScript googleMapsApiKey="AIzaSyDaZ10eIqb3u2d4t9uNBFSrTQUhj1iDP_w">
                 <GoogleMap
                   mapContainerStyle={{ width: '100%', height: '400px' }}
                   center={

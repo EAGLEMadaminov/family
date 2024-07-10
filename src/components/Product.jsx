@@ -168,7 +168,7 @@ const Product = ({ data: product }) => {
           {isLiked ? '❤' : '🤍'}
         </button>
       </div>
-      <h3 className="font-semibold text-[16px] capitalize ml-2 mb-0">
+      <h3 className="font-semibold text-center text-[16px] capitalize ml-2 mb-0">
         {product.title}
       </h3>
       {showPrice && (
@@ -180,7 +180,7 @@ const Product = ({ data: product }) => {
       )}
 
       {showPrice && count >= 1 && (
-        <div className="flex justify-between items-center mt-2 px-5">
+        <div className="flex justify-between items-center w-full mt-2 px-5">
           <button onClick={() => subsProductBtn(product)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +217,7 @@ const Product = ({ data: product }) => {
           className="p-1 px-3 w-[150px] mt-5 bg-gray-200 rounded-xl"
           onClick={() => addToCatrBtn(product)}
         >
-          {product.price} {t("price")}
+          {product.price} {t('price')}
         </button>
       )}
     </div>

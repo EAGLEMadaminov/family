@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import Product from "../../components/Product.jsx";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from 'react';
+import Product from '../../components/Product.jsx';
+import { useSelector } from 'react-redux';
 
 const Products = ({ data }) => {
   const [products, setProducts] = useState(data);
   const isChangeLike = useSelector((store) => store.product.isChangeLike);
 
   useEffect(() => {
-    let likedList = JSON.parse(localStorage.getItem("likedList"));
+    let likedList = JSON.parse(localStorage.getItem('likedList'));
     likedList = Boolean(likedList) ? likedList : [];
-    let choosen = JSON.parse(localStorage.getItem("choosen"));
+    let choosen = JSON.parse(localStorage.getItem('choosen'));
     choosen = Boolean(choosen) ? choosen : [];
     let arr = [];
     let choosenIds = [];

@@ -5,6 +5,7 @@ import ReactInputMask from 'react-input-mask';
 import AuthCode from 'react-auth-code-input';
 import { useTranslation } from 'react-i18next';
 import { checkLang } from '../redux/slices/main';
+import axiosInstance from '../utils/libs/axios';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -25,26 +26,38 @@ const Account = () => {
   };
 
   const handleActivationBtn = async () => {
-    console.log(1);
     let data = {};
     data.name = name;
     data.phone_number = phoneValue.replace(/\s/g, '');
     if (name && phoneValue) {
-      console.log(data);
-      setShowAuthCode(true);
-      setErrorMessage('');
+      try {
+        const { data: code } = await axiosInstance.post('/send-code', data);
+        if (code) {
+          console.log(code);
+          setShowAuthCode(true);
+          setErrorMessage('');
+        }
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       setErrorMessage(`${t('account.please_enter')}`);
     }
   };
   const sendActivation = async (value) => {
-    if (value.length == 5) {
+    if (value.length == 6) {
       let activation = {};
       activation.code = value;
       activation.phone_number = phoneValue.replace(/\s/g, '');
-      console.log(activation);
-      setShowAuthCode(false);
-      localStorage.setItem('access_token', 'has');
+      try {
+        const { data } = await axiosInstance.post('/verify-code', activation);
+        if (data) {
+          setShowAuthCode(false);
+          localStorage.setItem('access_token', data.token);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   useEffect(() => {
@@ -59,6 +72,25 @@ const Account = () => {
     i18n.changeLanguage(value);
     dispatch(checkLang(value));
   };
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const { data } = await axiosInstance.get('/user-info', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (data) {
+          setName(data.name);
+          setPhoneValue(data.phone_number);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUserInfo();
+  }, []);
+
   return (
     <div className="fixed pb-10 bottom-0 z-[1000] min-h-[60vh] border-t w-full  border-[#222] rounded-t-2xl bg-white">
       <div className="flex justify-between items-center border-b px-5 ">
@@ -157,7 +189,6 @@ const Account = () => {
                     {phoneValue}{' '}
                   </p>
                   <AuthCode
-                    length={5}
                     className="bg-[#1F2026]"
                     onChange={sendActivation}
                   />
@@ -190,7 +221,7 @@ const Account = () => {
               <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
             </svg>
             <div className="ml-3">
-              <p className="font-semibold text-[18px]">Name</p>
+              <p className="font-semibold text-[18px]">{name}</p>
               <p className="text-gray-500">{phoneValue}</p>
             </div>
           </div>

@@ -1,9 +1,9 @@
-import Footer from "./Footer";
-import Header from "./Header";
-import { useSelector } from "react-redux";
-import Account from "./Account";
-import Product from "../components/ProductPopup";
-import InformationPopup from "../components/InformationPopup";
+import Footer from './Footer';
+import Header from './Header';
+import { useSelector } from 'react-redux';
+import Account from '../components/Account';
+import Product from '../components/ProductPopup';
+import InformationPopup from '../components/InformationPopup';
 
 const DashboardLayouts = ({ children }) => {
   const openAccount = useSelector((store) => store.footer.isOpen);
@@ -18,9 +18,9 @@ const DashboardLayouts = ({ children }) => {
     <>
       <Header />
       {children}
-      {isShowProduct ? <Product data={product} /> : ""}
-      {openAccount ? <Account /> : ""}
-      {openInformation.show ? <InformationPopup id={openInformation.id} /> : ""}
+      {isShowProduct ? <Product data={product} /> : ''}
+      {openAccount ? <Account /> : ''}
+      {openInformation.show ? <InformationPopup id={openInformation.id} /> : ''}
       <Footer />
     </>
   );
