@@ -16,6 +16,8 @@ const Account = () => {
   const [name, setName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const isChangeLang = useSelector((store) => store.main.lang);
+  const [time, setTime] = useState({ min: '00', second: 60 });
+  const [sendMessageAgain, setSendMessageAgain] = useState(false);
   const { t, i18n } = useTranslation();
   const [selectedLang, setSelectedLang] = useState(
     localStorage.getItem('lang') || 'uz'
@@ -44,8 +46,9 @@ const Account = () => {
       setErrorMessage(`${t('account.please_enter')}`);
     }
   };
+  
   const sendActivation = async (value) => {
-    if (value.length == 6) {
+    if (value.length == 5) {
       let activation = {};
       activation.code = value;
       activation.phone_number = phoneValue.replace(/\s/g, '');
@@ -60,6 +63,7 @@ const Account = () => {
       }
     }
   };
+
   useEffect(() => {
     localStorage.setItem('lang', selectedLang);
     i18n.changeLanguage(selectedLang);
@@ -67,11 +71,13 @@ const Account = () => {
   setTimeout(() => {
     setErrorMessage('');
   }, 5000);
+
   const handleChangeLang = (value) => {
     setSelectedLang(value);
     i18n.changeLanguage(value);
     dispatch(checkLang(value));
   };
+
   useEffect(() => {
     const getUserInfo = async () => {
       try {
@@ -91,14 +97,37 @@ const Account = () => {
     getUserInfo();
   }, []);
 
+  useEffect(() => {
+    let countDown;
+    if (showAuthCode && time.second > 0) {
+      countDown = setInterval(() => {
+        setTime((prevTime) => {
+          const newSecond = prevTime.second - 1;
+          if (newSecond === 0) {
+            clearInterval(countDown);
+            setSendMessageAgain(true);
+          }
+          return { min: '00', second: newSecond };
+        });
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(countDown);
+    };
+  }, [showAuthCode, time.second]);
+  const handleLogOutAccount = () => {
+    localStorage.removeItem('access_token');
+    dispatch(showAccount(false));
+  };
   return (
     <div className="fixed pb-10 bottom-0 z-[1000] min-h-[60vh] border-t w-full  border-[#222] rounded-t-2xl bg-white">
-      <div className="flex justify-between items-center border-b px-5 ">
+      <div className="flex justify-between relative items-center border-b px-5 ">
         <h2 className="text-2xl font-bold text-center w-full py-5">
           {t('account.account')}
         </h2>
         <button
-          className="p-1 bg-[#8f48e0] text-white rounded-[50%]"
+          className="p-1 bg-[#8f48e0] absolute right-[20px] top-[15px] text-white rounded-[50%]"
           onClick={() => dispatch(showAccount(false))}
         >
           <svg
@@ -114,7 +143,7 @@ const Account = () => {
         </button>
       </div>
       {!token ? (
-        <div>
+        <div className="w-full">
           <div className="px-5 text-center">
             <p className="text-[18px] text-center mt-5">
               {t('account.now_you')}{' '}
@@ -132,7 +161,7 @@ const Account = () => {
             </button>
           </div>
           {showRegistration ? (
-            <div className="absolute h-[70vh] px-5 text-[18px] rounded-t-2xl border-t bg-white bottom-0">
+            <div className="absolute h-[70vh] right-0 left-0 px-5 text-[18px] rounded-t-2xl border-t bg-white bottom-0">
               <div className="flex justify-between items-center my-5">
                 <h2 className="text-2xl font-semibold text-center ">
                   {t('account.registr_btn')}
@@ -181,7 +210,7 @@ const Account = () => {
               )}
 
               {showAuthCode ? (
-                <div className="activation-code-div my-5">
+                <div className="activation-code-div my-5  ">
                   <p className="text-center text-[14px] mb-5 p-0">
                     {t('account.send_code')}
                   </p>
@@ -191,7 +220,24 @@ const Account = () => {
                   <AuthCode
                     className="bg-[#1F2026]"
                     onChange={sendActivation}
+                    length={5}
                   />
+                  {sendMessageAgain ? (
+                    <button
+                      type="button"
+                      className="text-[#671ABF]  mx-auto rounded-3xl p-2 mt-4 flex justify-center"
+                      onClick={() => {
+                        handleActivationBtn(), setSendMessageAgain(false);
+                        setTime({ min: '00', second: 60 });
+                      }}
+                    >
+                      Qayta jo&apos;natish
+                    </button>
+                  ) : (
+                    <p className="text-center mt-2 tracking-widest">
+                      {time.min} : {String(time.second).padStart(2, 0)}
+                    </p>
+                  )}
                 </div>
               ) : (
                 <button
@@ -267,7 +313,10 @@ const Account = () => {
             </div>
           </div>
 
-          <button className="border-[#671ABF] border text-[#671ABF] font-semibold w-[60%] mx-auto  rounded-3xl p-2 text- mt-4 flex justify-center">
+          <button
+            onClick={handleLogOutAccount}
+            className="border-[#671ABF] border text-[#671ABF] font-semibold w-[60%] mx-auto  rounded-3xl p-2 text- mt-4 flex justify-center"
+          >
             {t('account.log_out')}
           </button>
         </div>

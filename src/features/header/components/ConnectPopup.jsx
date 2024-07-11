@@ -24,10 +24,9 @@ const Connect = () => {
             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
           </svg>
         </button>
-        <h2 className="w-[60%] text-center text-3xl font-bold">Name</h2>
+        <h2 className="w-[90%] text-center text-3xl font-bold">Vodiy Tezkor</h2>
       </div>
       <div className="mt-5 text-center px-5 flex flex-col gap-3">
-        <h2 className="text-xl  text-center font-semibold">Name </h2>
         <img src={Delivery} alt="" className="h-[200px]  mx-auto" />
         <h2 className="text-2xl font-semibold text-center">
           {t('connect.fast_delivery')}
