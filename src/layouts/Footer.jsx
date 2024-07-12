@@ -17,6 +17,7 @@ const Footer = () => {
   const [lang, setLang] = useState(localStorage.getItem('lang'));
   const sliderRef = useRef(null);
   const { t } = useTranslation();
+
   useEffect(() => {
     let products = JSON.parse(localStorage.getItem('choosen'));
     products = Boolean(products) ? products : [];
@@ -47,6 +48,7 @@ const Footer = () => {
       clearInterval(timer);
       setChangeInterval(!changeInterval);
     };
+    
   }, [changeInterval, lang]);
 
   return (

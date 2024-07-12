@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactInputMask from 'react-input-mask';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
-import sendMessage from '../components/sendMessage';
-import { CHAT_ID, TGBOT_TOKEN } from '../utils/constants';
+import { toast } from 'react-toastify';
+import { showAccount } from '../redux/slices/footer';
+import { useDispatch } from 'react-redux';
+import axiosInstance from './../utils/libs/axios';
 
 const Purchase = () => {
   const { register, handleSubmit } = useForm();
@@ -14,6 +16,7 @@ const Purchase = () => {
   const [mapUrl, setMapUrl] = useState('');
   const [clickCurrent, setClickCurrent] = useState(false);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const token = localStorage.getItem('access_token');
 
   const formatChars = {
@@ -51,31 +54,39 @@ const Purchase = () => {
   };
 
   const handleOrderBtn = async (data) => {
-    data.phone_number = phoneVale.replace(/\s/g, '');
-    let message = '';
-    console.log(mapUrl);
-    if (mapUrl) {
-      data.url = mapUrl;
-    }
-    console.log(data);
-    if (isDelivery) {
-      message = `Ism: ${data.first_name}
-       Familiya: ${data.last_name}
-       Raqam: ${data.phone_number}
-       Izoh: ${data.comment}
-       Uy raqami: ${data.home_number}
-       Ko'cha nomi: ${data.street}
-       Damafone kodi: ${data.door_phone}`;
-    } else {
-      message = `Ism: ${data.first_name}
-      Familiya: ${data.last_name}
-      Raqam: ${data.phone_number}
-      Izoh: ${data.comment}`;
-    }
+    const choosenProducts = localStorage.getItem('choosen');
 
-    console.log(message, CHAT_ID, TGBOT_TOKEN);
+    const token = localStorage.getItem('access_token');
     if (token) {
-      sendMessage(CHAT_ID, message, TGBOT_TOKEN);
+      data.phone_number = phoneVale.replace(/\s/g, '');
+      console.log(mapUrl);
+      if (mapUrl) {
+        data.url = mapUrl;
+      }
+      data.products = choosenProducts;
+      console.log(data);
+      if (isDelivery) {
+        data.isDelivery = true;
+      } else {
+        data.isDelivery = false;
+      }
+      try {
+        const { data: res } = await axiosInstance.post('/order', data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (error) {
+        console.log(error);
+        toast.error('Nimadir xato ketdi');
+      }
+    } else {
+      toast.warn(
+        "Sizda hozzircha account yo'q. Account bo'limiga o'tib account yarating."
+      );
+      setTimeout(() => {
+        dispatch(showAccount(true));
+      }, 3000);
     }
   };
 

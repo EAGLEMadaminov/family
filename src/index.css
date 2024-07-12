@@ -54,3 +54,8 @@
 .connect-an {
   animation: slideIn 0.5s ease-out forwards;
 }
+
+.toast_warning {
+  background: #ecb90d;
+  color: white;
+}
