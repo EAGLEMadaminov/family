@@ -5,19 +5,29 @@ import { useSelector } from 'react-redux';
 const Products = ({ data }) => {
   const [products, setProducts] = useState(data);
   const isChangeLike = useSelector((store) => store.product.isChangeLike);
+  let likedList = [];
+  const token = localStorage.getItem('access_token');
 
   useEffect(() => {
-    let likedList = JSON.parse(localStorage.getItem('likedList'));
-    likedList = Boolean(likedList) ? likedList : [];
+    let likedItems = JSON.parse(localStorage.getItem('likedList'));
+    likedItems = Boolean(likedItems) ? likedItems : [];
+    if (token) {
+      likedItems = likedList;
+    }
     let choosen = JSON.parse(localStorage.getItem('choosen'));
     choosen = Boolean(choosen) ? choosen : [];
     let arr = [];
     let choosenIds = [];
     choosen.forEach((item) => {
+      console.log(item);
       choosenIds.push(item.id);
     });
-    likedList.forEach((item) => {
-      arr.push(item.id);
+    likedItems.forEach((item) => {
+      if (token) {
+        arr.push(Number(item));
+      } else {
+        arr.push(item.id);
+      }
     });
     let newArr = data.filter((product) => {
       if (arr.includes(product.id)) {
@@ -29,13 +39,12 @@ const Products = ({ data }) => {
     });
     newArr = newArr.filter((product) => {
       if (choosenIds.includes(product.id)) {
-        product.count = true;
+        product.isLiked = true;
       } else {
         product.isLiked = false;
       }
       return product;
     });
-
     setProducts(newArr);
   }, [isChangeLike]);
 

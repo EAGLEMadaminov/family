@@ -31,9 +31,13 @@ const Account = () => {
     let data = {};
     data.name = name;
     data.phone_number = phoneValue.replace(/\s/g, '');
+    console.log(data);
     if (name && phoneValue) {
       try {
-        const { data: code } = await axiosInstance.post('/send-code', data);
+        const { data: code } = await axiosInstance.post(
+          '/auth/send-code',
+          data
+        );
         if (code) {
           console.log(code);
           setShowAuthCode(true);
@@ -46,17 +50,20 @@ const Account = () => {
       setErrorMessage(`${t('account.please_enter')}`);
     }
   };
-  
+
   const sendActivation = async (value) => {
     if (value.length == 5) {
       let activation = {};
       activation.code = value;
       activation.phone_number = phoneValue.replace(/\s/g, '');
       try {
-        const { data } = await axiosInstance.post('/verify-code', activation);
+        const { data } = await axiosInstance.post(
+          'auth/verify-code',
+          activation
+        );
         if (data) {
           setShowAuthCode(false);
-          localStorage.setItem('access_token', data.token);
+          localStorage.setItem('access_token', data.access_token);
         }
       } catch (error) {
         console.log(error);

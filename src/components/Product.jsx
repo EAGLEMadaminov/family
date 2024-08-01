@@ -7,8 +7,10 @@ import {
   checkLike,
 } from '../redux/slices/product';
 import { useTranslation } from 'react-i18next';
+import axiosInstance from '../utils/libs/axios';
 
 const Product = ({ data: product }) => {
+  log
   const [productStates, setProductStates] = useState({});
   const countChange = useSelector((store) => store.footer.isChangeCount);
   const productState = productStates[product.id] || {};
@@ -118,19 +120,20 @@ const Product = ({ data: product }) => {
   };
 
   const showWithTokenLike = async (product, token) => {
-    // try {
-    //   let { data } = await axiosIntance.post(
-    //     `/products/${product.id}/like/`,
-    //     null,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${token}`,
-    //       },
-    //     }
-    //   );
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      let { data } = await axiosInstance.post(
+        `/like/`,
+        { itemId: product?.id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleLikeBtn = (product) => {

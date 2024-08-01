@@ -10,7 +10,6 @@ const Restaurant = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [searchValue, setSearchValue] = useState('');
   const { id } = useParams();
-  const lang = useSelector((store) => store.main.lang);
   let data = categories.filter((item) => item.id == id);
 
   const sectionRefs = useRef(

@@ -5,8 +5,10 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { showAccount } from '../redux/slices/footer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axiosInstance from './../utils/libs/axios';
+import { useNavigate } from 'react-router-dom';
+import { checkSelectCount } from '../redux/slices/cart';
 
 const Purchase = () => {
   const { register, handleSubmit } = useForm();
@@ -15,8 +17,11 @@ const Purchase = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [mapUrl, setMapUrl] = useState('');
   const [clickCurrent, setClickCurrent] = useState(false);
+  const emptyChoosen = useSelector((store) => store.cart.isChangeSelectCount);
+  console.log(emptyChoosen);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const token = localStorage.getItem('access_token');
 
   const formatChars = {
@@ -56,7 +61,6 @@ const Purchase = () => {
   const handleOrderBtn = async (data) => {
     const choosenProducts = localStorage.getItem('choosen');
 
-    const token = localStorage.getItem('access_token');
     if (token) {
       data.phone_number = phoneVale.replace(/\s/g, '');
       console.log(mapUrl);
@@ -76,6 +80,11 @@ const Purchase = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        if (res) {
+          navigate('/');
+          dispatch(checkSelectCount(!emptyChoosen));
+          localStorage.removeItem('choosen');
+        }
       } catch (error) {
         console.log(error);
         toast.error('Nimadir xato ketdi');
