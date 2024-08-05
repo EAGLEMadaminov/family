@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import axiosInstance from '../utils/libs/axios';
 
 const Product = ({ data: product }) => {
-  log
+
   const [productStates, setProductStates] = useState({});
   const countChange = useSelector((store) => store.footer.isChangeCount);
   const productState = productStates[product.id] || {};
