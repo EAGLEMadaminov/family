@@ -1,53 +1,53 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { showAccount } from '../redux/slices/footer';
-import ReactInputMask from 'react-input-mask';
-import AuthCode from 'react-auth-code-input';
-import { useTranslation } from 'react-i18next';
-import { checkLang } from '../redux/slices/main';
-import axiosInstance from '../utils/libs/axios';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showAccount } from "../redux/slices/footer";
+import ReactInputMask from "react-input-mask";
+import AuthCode from "react-auth-code-input";
+import { useTranslation } from "react-i18next";
+import { checkLang } from "../redux/slices/main";
+import axiosInstance from "../utils/libs/axios";
 
 const Account = () => {
   const dispatch = useDispatch();
-  let token = localStorage.getItem('access_token');
+  let token = localStorage.getItem("access_token");
   const [showRegistration, setShowRegistration] = useState(false);
-  const [phoneValue, setPhoneValue] = useState('');
+  const [phoneValue, setPhoneValue] = useState("");
   const [showAuthCode, setShowAuthCode] = useState(false);
-  const [name, setName] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const isChangeLang = useSelector((store) => store.main.lang);
-  const [time, setTime] = useState({ min: '00', second: 60 });
+  const [time, setTime] = useState({ min: "00", second: 60 });
   const [sendMessageAgain, setSendMessageAgain] = useState(false);
   const { t, i18n } = useTranslation();
   const [selectedLang, setSelectedLang] = useState(
-    localStorage.getItem('lang') || 'uz'
+    localStorage.getItem("lang") || "uz"
   );
 
   const formatChars = {
-    '-': '[0-9]',
+    "-": "[0-9]",
   };
 
   const handleActivationBtn = async () => {
     let data = {};
     data.name = name;
-    data.phone_number = phoneValue.replace(/\s/g, '');
+    data.phone_number = phoneValue.replace(/\s/g, "");
     console.log(data);
     if (name && phoneValue) {
       try {
         const { data: code } = await axiosInstance.post(
-          '/auth/send-code',
+          "/auth/send-code",
           data
         );
         if (code) {
           console.log(code);
           setShowAuthCode(true);
-          setErrorMessage('');
+          setErrorMessage("");
         }
       } catch (error) {
         console.log(error);
       }
     } else {
-      setErrorMessage(`${t('account.please_enter')}`);
+      setErrorMessage(`${t("account.please_enter")}`);
     }
   };
 
@@ -55,15 +55,16 @@ const Account = () => {
     if (value.length == 5) {
       let activation = {};
       activation.code = value;
-      activation.phone_number = phoneValue.replace(/\s/g, '');
+      activation.name = name;
+      activation.phone_number = phoneValue.replace(/\s/g, "");
       try {
         const { data } = await axiosInstance.post(
-          'auth/verify-code',
+          "auth/verify-code",
           activation
         );
         if (data) {
           setShowAuthCode(false);
-          localStorage.setItem('access_token', data.access_token);
+          localStorage.setItem("access_token", data.access_token);
         }
       } catch (error) {
         console.log(error);
@@ -72,11 +73,11 @@ const Account = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem('lang', selectedLang);
+    localStorage.setItem("lang", selectedLang);
     i18n.changeLanguage(selectedLang);
   }, [selectedLang, isChangeLang]);
   setTimeout(() => {
-    setErrorMessage('');
+    setErrorMessage("");
   }, 5000);
 
   const handleChangeLang = (value) => {
@@ -88,7 +89,7 @@ const Account = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       try {
-        const { data } = await axiosInstance.get('/user-info', {
+        const { data } = await axiosInstance.get("/user-info", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -114,7 +115,7 @@ const Account = () => {
             clearInterval(countDown);
             setSendMessageAgain(true);
           }
-          return { min: '00', second: newSecond };
+          return { min: "00", second: newSecond };
         });
       }, 1000);
     }
@@ -123,15 +124,16 @@ const Account = () => {
       clearInterval(countDown);
     };
   }, [showAuthCode, time.second]);
+
   const handleLogOutAccount = () => {
-    localStorage.removeItem('access_token');
+    localStorage.removeItem("access_token");
     dispatch(showAccount(false));
   };
   return (
     <div className="fixed pb-10 bottom-0 z-[1000] min-h-[60vh] border-t w-full  border-[#222] rounded-t-2xl bg-white">
       <div className="flex justify-between relative items-center border-b px-5 ">
         <h2 className="text-2xl font-bold text-center w-full py-5">
-          {t('account.account')}
+          {t("account.account")}
         </h2>
         <button
           className="p-1 bg-[#8f48e0] absolute right-[20px] top-[15px] text-white rounded-[50%]"
@@ -153,25 +155,25 @@ const Account = () => {
         <div className="w-full">
           <div className="px-5 text-center">
             <p className="text-[18px] text-center mt-5">
-              {t('account.now_you')}{' '}
+              {t("account.now_you")}{" "}
               <span className="text-[#671ABF] font-semibold">
-                {t('account.no_account')}
+                {t("account.no_account")}
               </span>
-              . {t('account.new_open')}
+              . {t("account.new_open")}
             </p>
 
             <button
               className="w-[80%] rounded-3xl mt-4 p-2 text-center text-white text-[18px] mx-auto bg-[#671ABF]"
               onClick={() => setShowRegistration(true)}
             >
-              {t('account.registr_btn')}
+              {t("account.registr_btn")}
             </button>
           </div>
           {showRegistration ? (
             <div className="absolute h-[70vh] right-0 left-0 px-5 text-[18px] rounded-t-2xl border-t bg-white bottom-0">
               <div className="flex justify-between items-center my-5">
                 <h2 className="text-2xl font-semibold text-center ">
-                  {t('account.registr_btn')}
+                  {t("account.registr_btn")}
                 </h2>
                 <button
                   className="p-1 bg-[#8f48e0] text-white rounded-[50%]"
@@ -190,19 +192,19 @@ const Account = () => {
                 </button>
               </div>
               {showAuthCode ? (
-                ''
+                ""
               ) : (
                 <div>
-                  <label htmlFor="name">{t('order.name')} *</label>
+                  <label htmlFor="name">{t("order.name")} *</label>
                   <input
                     type="text"
                     required
                     id="name"
                     onChange={(e) => setName(e.target.value)}
                     className="w-full p-1 px-2 my-2  border rounded-lg text-[18px]"
-                    placeholder={t('order.name_input')}
+                    placeholder={t("order.name_input")}
                   />
-                  <label htmlFor="phone">{t('order.phone')} *</label>
+                  <label htmlFor="phone">{t("order.phone")} *</label>
                   <ReactInputMask
                     formatChars={formatChars}
                     mask="+998 -- --- -- --"
@@ -219,10 +221,10 @@ const Account = () => {
               {showAuthCode ? (
                 <div className="activation-code-div my-5  ">
                   <p className="text-center text-[14px] mb-5 p-0">
-                    {t('account.send_code')}
+                    {t("account.send_code")}
                   </p>
                   <p className="text-[#671ABF] mb-5 text-[14px] mx-auto flex justify-center p-0 m-0">
-                    {phoneValue}{' '}
+                    {phoneValue}{" "}
                   </p>
                   <AuthCode
                     className="bg-[#1F2026]"
@@ -235,7 +237,7 @@ const Account = () => {
                       className="text-[#671ABF]  mx-auto rounded-3xl p-2 mt-4 flex justify-center"
                       onClick={() => {
                         handleActivationBtn(), setSendMessageAgain(false);
-                        setTime({ min: '00', second: 60 });
+                        setTime({ min: "00", second: 60 });
                       }}
                     >
                       Qayta jo&apos;natish
@@ -252,12 +254,12 @@ const Account = () => {
                   className="bg-[#671ABF] w-[80%] mx-auto text-white rounded-3xl p-2 text-xl mt-4 flex justify-center"
                   onClick={handleActivationBtn}
                 >
-                  {t('account.agree')}
+                  {t("account.agree")}
                 </button>
               )}
             </div>
           ) : (
-            ''
+            ""
           )}
         </div>
       ) : (
@@ -315,7 +317,7 @@ const Account = () => {
             </svg>
             <div className="ml-3">
               <p className="font-semibold text-[18px]">
-                {t('account.uzbek_sum')}
+                {t("account.uzbek_sum")}
               </p>
             </div>
           </div>
@@ -324,7 +326,7 @@ const Account = () => {
             onClick={handleLogOutAccount}
             className="border-[#671ABF] border text-[#671ABF] font-semibold w-[60%] mx-auto  rounded-3xl p-2 text- mt-4 flex justify-center"
           >
-            {t('account.log_out')}
+            {t("account.log_out")}
           </button>
         </div>
       )}

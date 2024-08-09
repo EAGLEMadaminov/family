@@ -74,6 +74,8 @@ const Purchase = () => {
       } else {
         data.isDelivery = false;
       }
+      console.log(data);
+      
       try {
         const { data: res } = await axiosInstance.post('/order', data, {
           headers: {
