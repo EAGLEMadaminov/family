@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { categories } from '../utils/Data';
-import RestaurantComponent from '../components/RestaurantComponent.jsx';
-import Products from '../features/restaurant/Products.jsx';
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { categories } from "../utils/Data";
+import RestaurantComponent from "../components/RestaurantComponent.jsx";
+import Products from "../features/restaurant/Products.jsx";
 
 const Restaurant = () => {
   const [showElement, setShowElement] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const { id } = useParams();
   let data = categories.filter((item) => item.id == id);
 
@@ -42,9 +42,9 @@ const Restaurant = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -60,8 +60,8 @@ const Restaurant = () => {
           <RestaurantComponent
             data={one}
             key={one.id}
-            styles={'rounded-none w-screen'}
-            textStyle={'px-5'}
+            styles={"rounded-none w-screen"}
+            textStyle={"px-5"}
           />
         );
       })}
@@ -75,8 +75,8 @@ const Restaurant = () => {
                 key={item.id}
                 className={`border ${
                   activeSection === item.id
-                    ? 'bg-[#671ABF] text-white'
-                    : 'bg-white'
+                    ? "bg-[#671ABF] text-white"
+                    : "bg-white"
                 } border-[#671ABF] uppercase p-1 px-2 ml-5 rounded-xl shodow-lg`}
               >
                 {item.name}
@@ -85,7 +85,7 @@ const Restaurant = () => {
           })}
         </div>
       ) : (
-        ''
+        ""
       )}
 
       <div className="px-5 mx-5 flex items-center p-2  bg-gray-100 text-gray-400 rounded-xl">

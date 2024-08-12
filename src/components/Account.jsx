@@ -6,6 +6,7 @@ import AuthCode from "react-auth-code-input";
 import { useTranslation } from "react-i18next";
 import { checkLang } from "../redux/slices/main";
 import axiosInstance from "../utils/libs/axios";
+import { toast } from "react-toastify";
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,6 @@ const Account = () => {
     let data = {};
     data.name = name;
     data.phone_number = phoneValue.replace(/\s/g, "");
-    console.log(data);
     if (name && phoneValue) {
       try {
         const { data: code } = await axiosInstance.post(
@@ -39,8 +39,8 @@ const Account = () => {
           data
         );
         if (code) {
-          console.log(code);
           setShowAuthCode(true);
+          localStorage.setItem("codeToken", code.codeToken);
           setErrorMessage("");
         }
       } catch (error) {
@@ -52,22 +52,32 @@ const Account = () => {
   };
 
   const sendActivation = async (value) => {
+    const codeToken = localStorage.getItem("codeToken");
+
     if (value.length == 5) {
       let activation = {};
       activation.code = value;
       activation.name = name;
       activation.phone_number = phoneValue.replace(/\s/g, "");
+
       try {
         const { data } = await axiosInstance.post(
           "auth/verify-code",
-          activation
+          activation,
+          {
+            headers: {
+              "code-token": codeToken,
+            },
+          }
         );
         if (data) {
           setShowAuthCode(false);
           localStorage.setItem("access_token", data.access_token);
+          localStorage.removeItem("codeToken");
         }
       } catch (error) {
         console.log(error);
+        toast.error("Kode xato kiritildi!");
       }
     }
   };

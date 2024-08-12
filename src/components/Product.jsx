@@ -1,20 +1,25 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkCount } from '../redux/slices/footer';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { checkCount } from "../redux/slices/footer";
 import {
   getSelectedProduct,
   showSingleProduct,
   checkLike,
-} from '../redux/slices/product';
-import { useTranslation } from 'react-i18next';
-import axiosInstance from '../utils/libs/axios';
+} from "../redux/slices/product";
+import { useTranslation } from "react-i18next";
+import axiosInstance from "../utils/libs/axios";
+import { toast } from "react-toastify";
+import { data } from "autoprefixer";
 
 const Product = ({ data: product }) => {
-
   const [productStates, setProductStates] = useState({});
   const countChange = useSelector((store) => store.footer.isChangeCount);
   const productState = productStates[product.id] || {};
-  const { showPrice = false, count = 1, isLiked } = productState;
+  const {
+    showPrice = product.showPrice,
+    count = product.count,
+    isLiked,
+  } = productState;
   const isChangeLike = useSelector((store) => store.product.isChangeLike);
   const { t } = useTranslation();
 
@@ -34,7 +39,7 @@ const Product = ({ data: product }) => {
   };
 
   useEffect(() => {
-    let allLiked = JSON.parse(localStorage.getItem('likedList'));
+    let allLiked = JSON.parse(localStorage.getItem("likedList"));
     allLiked = allLiked?.length > 0 ? allLiked : [];
     allLiked.forEach((item) => {
       if (item.id === product.id) {
@@ -46,7 +51,7 @@ const Product = ({ data: product }) => {
 
   const subsProductBtn = (product) => {
     dispatch(checkCount(!countChange));
-    let values = JSON.parse(localStorage.getItem('choosen'));
+    let values = JSON.parse(localStorage.getItem("choosen"));
     let productCount = 0;
     values.forEach((item) => {
       if (item.id === product.id) {
@@ -56,19 +61,18 @@ const Product = ({ data: product }) => {
 
     if (productCount <= 1) {
       let newArr = values.filter((one) => one.id !== product.id);
-      localStorage.setItem('choosen', JSON.stringify(newArr));
+      localStorage.setItem("choosen", JSON.stringify(newArr));
       updateProductState(product.id, { showPrice: false });
     } else {
       let arr = subsFunction(values, product);
-      localStorage.setItem('choosen', JSON.stringify(arr));
+      localStorage.setItem("choosen", JSON.stringify(arr));
     }
   };
 
   const addOneProductBtn = (product) => {
-    console.log(productState);
     dispatch(checkCount(!countChange));
     let productCount = 0;
-    let value = JSON.parse(localStorage.getItem('choosen'));
+    let value = JSON.parse(localStorage.getItem("choosen"));
     value = value.map((item) => {
       if (item.id === product.id) {
         item.count += 1;
@@ -76,16 +80,25 @@ const Product = ({ data: product }) => {
       }
       return item;
     });
-    localStorage.setItem('choosen', JSON.stringify(value));
+    localStorage.setItem("choosen", JSON.stringify(value));
     updateProductState(product.id, { count: productCount });
   };
 
   const addToCatrBtn = (product) => {
+    const date = new Date().getHours();
+
+    if (product.category === "taom" && (date < 10 || date > 14)) {
+      return toast.warn(
+        "Kechirasiz taomni faqat 10 dan 14 gacha buyurtma bera olasiz!"
+      );
+    }
+
     dispatch(checkCount(!countChange));
-    let oldValues = JSON.parse(localStorage.getItem('choosen'));
+    let oldValues = JSON.parse(localStorage.getItem("choosen"));
     oldValues = Boolean(oldValues) ? oldValues : [];
+
     oldValues.push(product);
-    localStorage.setItem('choosen', JSON.stringify(oldValues));
+    localStorage.setItem("choosen", JSON.stringify(oldValues));
     let updatedProduct = { ...product, showPrice: true, count: 1 };
     updateProductState(product.id, updatedProduct);
   };
@@ -138,13 +151,13 @@ const Product = ({ data: product }) => {
 
   const handleLikeBtn = (product) => {
     dispatch(checkLike(!isChangeLike));
-    let token = localStorage.getItem('access_token');
-    let value = '';
+    let token = localStorage.getItem("access_token");
+    let value = "";
     if (token) {
       showWithTokenLike(product, token);
-      value = 'userLikedList';
+      value = "userLikedList";
     } else {
-      value = 'likedList';
+      value = "likedList";
     }
     productLikeFunction(product, value);
   };
@@ -161,14 +174,16 @@ const Product = ({ data: product }) => {
             dispatch(getSelectedProduct(product));
             dispatch(showSingleProduct(true));
           }}
-          className="h-[150px] w-[150px] md:w-full  rounded-xl object-cover  product-shadow"
+          className={`h-[150px] w-[150px] md:w-full  rounded-xl ${
+            product.category === "ichimlik" ? "object-contain" : "object-cover"
+          }  product-shadow`}
           alt="Food image"
         />
         <button
           className="absolute right-[10px] text-xl bg-transparent top-[10px]"
           onClick={() => handleLikeBtn(product)}
         >
-          {isLiked ? '❤' : '🤍'}
+          {isLiked ? "❤" : "🤍"}
         </button>
       </div>
       <h3 className="font-semibold text-center text-[16px] capitalize ml-2 mb-0">
@@ -177,7 +192,7 @@ const Product = ({ data: product }) => {
       {showPrice && (
         <div>
           <p className="text-[12px] flex flex-col mt-0 ml-2 font-bold text-[#222]">
-            {product.price} {t('price')}
+            {product.price} {t("price")}
           </p>
         </div>
       )}
@@ -220,7 +235,7 @@ const Product = ({ data: product }) => {
           className="p-1 px-3 w-[150px] mt-5 bg-gray-200 rounded-xl"
           onClick={() => addToCatrBtn(product)}
         >
-          {product.price} {t('price')}
+          {product.price} {t("price")}
         </button>
       )}
     </div>
