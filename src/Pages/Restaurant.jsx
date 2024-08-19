@@ -8,10 +8,10 @@ import Products from "../features/restaurant/Products.jsx";
 const Restaurant = () => {
   const [showElement, setShowElement] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
-  const [searchValue, setSearchValue] = useState("");
+  const [translateX, setTranslateX] = useState(0);
   const { id } = useParams();
+  const headRef = useRef(null);
   let data = categories.filter((item) => item.id == id);
-
   const sectionRefs = useRef(
     data[0].options?.reduce((acc, option) => {
       acc[option.id] = React.createRef();
@@ -48,6 +48,29 @@ const Restaurant = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const updateTranslateX = () => {
+      if (headRef.current) {
+        const elementWidth = headRef.current.offsetWidth;
+        const windowWidth = window.innerWidth;
+
+        // Adjust translateX only if the element's width is greater than the window's width
+        if (elementWidth > windowWidth) {
+          setTranslateX(-Number(activeSection) * 20);
+        } else {
+          setTranslateX(0); // Reset translateX if the element's width is less than or equal to the window width
+        }
+      }
+    };
+
+    updateTranslateX(); // Set initial translateX value
+    window.addEventListener("resize", updateTranslateX);
+
+    return () => {
+      window.removeEventListener("resize", updateTranslateX);
+    };
+  }, [activeSection]);
+
   const handleChange = async (e) => {
     let value = e.target.value;
     setSearchValue(value);
@@ -67,12 +90,18 @@ const Restaurant = () => {
       })}
 
       {showElement ? (
-        <div className="fixed top-[85px]  py-5 w-screen no-scrollbar snap-x snap-mandatory overflow-x-scroll z-[1000000000000000000] left-0">
+        <div
+          ref={headRef}
+          className="fixed top-[85px] 
+          }px] py-5 min-w-screen no-scrollbar snap-x snap-mandatory overflow-x-scroll z-[1000000000000000000] left-0"
+          style={{ transform: `translateX(${translateX}px)` }}
+        >
           {data[0].options?.map((item) => {
             return (
               <a
                 href={`#${item.id}`}
                 key={item.id}
+                onClick={() => setActiveSection(item.id)}
                 className={`border ${
                   activeSection === item.id
                     ? "bg-[#671ABF] text-white"

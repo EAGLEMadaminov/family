@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { showSingleProduct } from '../redux/slices/product';
-import { checkCount } from '../redux/slices/footer';
-import { useTranslation } from 'react-i18next';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { showSingleProduct } from "../redux/slices/product";
+import { checkCount } from "../redux/slices/footer";
+import { useTranslation } from "react-i18next";
 
-const Product = ({ data }) => {
+const ProductPopup = ({ data: product }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [count, setCount] = useState(1);
   const isChangeCount = useSelector((store) => store.footer.isChangeCount);
@@ -13,31 +13,37 @@ const Product = ({ data }) => {
 
   const addToCartBtn = () => {
     dispatch(checkCount(!isChangeCount));
-    let product = { ...data };
-    product.count = count;
     let has = false;
-    let arr = JSON.parse(localStorage.getItem('choosen'));
-    arr = Boolean(arr) ? arr : [];
-    arr = arr.filter((element) => {
-      if (element.id == data.id) {
-        element.count = count;
+    let arr = JSON.parse(localStorage.getItem("choosen")) || [];
+
+    arr = arr.map((element) => {
+      if (element.id === product.id) {
         has = true;
+        // Create a new object with the updated count
+        return { ...element, count };
       }
       return element;
     });
+
     if (!has) {
-      arr.push(product);
+      // If the product is not in the array, add a new object to the array
+      arr.push({ ...product, count });
     }
-    localStorage.setItem('choosen', JSON.stringify(arr));
+
+    localStorage.setItem("choosen", JSON.stringify(arr));
   };
+
   return (
     <div className="fixed h-[80vh] z-[10000000000] bottom-0 left-0 right-0 bg-white shadow-lg rounded-2xl border-t ">
       <div className="flex my-3 relative justify-center">
         <h2 className="text-2xl font-semibold  capitalize">
-          {data.title.slice(0, 20)}
+          {product.title.slice(0, 20)}
         </h2>
         <button
-          onClick={() => dispatch(showSingleProduct(false))}
+          onClick={() => {
+            dispatch(showSingleProduct(false));
+            console.log(product);
+          }}
           className=" p-1 absolute right-3 top-1 bg-gray-400 rounded-[50%]"
         >
           <svg
@@ -55,7 +61,7 @@ const Product = ({ data }) => {
 
       <div className="relative">
         <img
-          src={data.image}
+          src={product.image}
           alt="product iamge"
           className="mx-auto h-[200px] w-screen object-cover "
         />
@@ -63,7 +69,7 @@ const Product = ({ data }) => {
           className="absolute right-[20px] bg-transparent text-2xl bottom-[10px]"
           onClick={() => setIsLiked(!isLiked)}
         >
-          {isLiked ? '❤' : '🤍'}
+          {isLiked ? "❤" : "🤍"}
         </button>
       </div>
       <div className="flex justify-center px-5 mt-3 items-center flex-col ">
@@ -105,7 +111,7 @@ const Product = ({ data }) => {
           </button>
         </div>
         <p className="font-semibold text-xl">
-          {data.price.toLocaleString()} <sup>{t("price")}</sup>
+          {product.price.toLocaleString()} <sup>{t("price")}</sup>
         </p>
       </div>
       <p className="px-5 mt-4 text-justify">
@@ -117,10 +123,10 @@ const Product = ({ data }) => {
         className="w-[60%] bg-[#671ABF] mx-auto flex justify-center mt-3 text-white p-2 rounded-2xl"
         onClick={addToCartBtn}
       >
-        {t('add_to_cart')}
+        {t("add_to_cart")}
       </button>
     </div>
   );
 };
 
-export default Product;
+export default ProductPopup;

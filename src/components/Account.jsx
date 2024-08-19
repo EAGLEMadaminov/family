@@ -7,9 +7,11 @@ import { useTranslation } from "react-i18next";
 import { checkLang } from "../redux/slices/main";
 import axiosInstance from "../utils/libs/axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Account = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   let token = localStorage.getItem("access_token");
   const [showRegistration, setShowRegistration] = useState(false);
   const [phoneValue, setPhoneValue] = useState("");
@@ -19,6 +21,7 @@ const Account = () => {
   const isChangeLang = useSelector((store) => store.main.lang);
   const [time, setTime] = useState({ min: "00", second: 60 });
   const [sendMessageAgain, setSendMessageAgain] = useState(false);
+  const [myOrder, setMyOrder] = useState([]);
   const { t, i18n } = useTranslation();
   const [selectedLang, setSelectedLang] = useState(
     localStorage.getItem("lang") || "uz"
@@ -86,6 +89,7 @@ const Account = () => {
     localStorage.setItem("lang", selectedLang);
     i18n.changeLanguage(selectedLang);
   }, [selectedLang, isChangeLang]);
+
   setTimeout(() => {
     setErrorMessage("");
   }, 5000);
@@ -113,6 +117,10 @@ const Account = () => {
       }
     };
     getUserInfo();
+    let userOrder = localStorage.getItem("my_order") || [];
+    if (userOrder.length > 0) {
+      setMyOrder(userOrder);
+    }
   }, []);
 
   useEffect(() => {
@@ -290,6 +298,32 @@ const Account = () => {
               <p className="text-gray-500">{phoneValue}</p>
             </div>
           </div>
+          {myOrder.length > 0 && (
+            <div className="flex mt-5 items-center border-b py-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                fill="#673dc1"
+                class="bi bi-cart-check-fill"
+                viewBox="0 0 16 16"
+              >
+                <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708" />
+              </svg>
+              <div className="ml-3">
+                <button
+                  onClick={() => {
+                    navigate("/userorder");
+                    dispatch(showAccount(false));
+                  }}
+                  className="font-semibold  text-center text-[18px] p-2 px-5 border rounded-3xl"
+                >
+                  {t("account.my-order")}
+                </button>
+              </div>
+            </div>
+          )}
+
           <div className="flex mt-5 items-center border-b py-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"

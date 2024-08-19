@@ -1,36 +1,36 @@
-import { useEffect, useState } from 'react';
-import CartImage from '../assets/cart.jpg';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkCount } from '../redux/slices/footer';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from "react";
+import CartImage from "../assets/cart.jpg";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { checkCount } from "../redux/slices/footer";
+import { useTranslation } from "react-i18next";
 
 const Cart = () => {
-  let allData = JSON.parse(localStorage.getItem('choosen'));
+  let allData = JSON.parse(localStorage.getItem("choosen"));
   allData = Boolean(allData) ? allData : [];
-  const [changeCount, setChangeCount] = useState(false);
-  const [allPrice, setAllPrice] = useState('');
+  const [allPrice, setAllPrice] = useState("");
   const [data, setData] = useState(allData);
   const dispatch = useDispatch();
-  const isChangeCount = useSelector((store) => store.footer.isChangeCount);
+  const countChange = useSelector((store) => store.footer.isChangeCount);
+
   const { t } = useTranslation();
 
   useEffect(() => {
     let value = 0;
     if (allData.length > 0) {
       allData.forEach((element) => {
-        value += Number(element.price.replace(/\s/g, '')) * element.count;
+        value += Number(element.price.replace(/\s/g, "")) * element.count;
       });
     }
     setAllPrice(value);
-  }, [allData, changeCount]);
+  }, [allData, countChange]);
 
   const navigate = useNavigate();
 
   const subsProductBtn = (product) => {
-    dispatch(checkCount(!isChangeCount));
-    setChangeCount(!changeCount);
-    let arr = JSON.parse(localStorage.getItem('choosen'));
+    dispatch(checkCount(!countChange));
+
+    let arr = JSON.parse(localStorage.getItem("choosen"));
     arr = Boolean(arr) ? arr : [];
     if (product.count > 1) {
       arr = arr.filter((one) => {
@@ -43,14 +43,13 @@ const Cart = () => {
     } else {
       arr = arr.filter((one) => one.id !== product.id);
     }
-    localStorage.setItem('choosen', JSON.stringify(arr));
+    localStorage.setItem("choosen", JSON.stringify(arr));
     setData(arr);
   };
 
   const addOneProductBtn = (item) => {
-    dispatch(checkCount(!isChangeCount));
-    setChangeCount(!changeCount);
-    let arr = JSON.parse(localStorage.getItem('choosen'));
+    dispatch(checkCount(!countChange));
+    let arr = JSON.parse(localStorage.getItem("choosen"));
     arr = Boolean(arr) ? arr : [];
     arr = arr.filter((one) => {
       if (item.id === one.id) {
@@ -59,12 +58,11 @@ const Cart = () => {
       return one;
     });
     setData(arr);
-    localStorage.setItem('choosen', JSON.stringify(arr));
+    localStorage.setItem("choosen", JSON.stringify(arr));
   };
   const handleClearCart = () => {
-    dispatch(checkCount(!isChangeCount));
-    setChangeCount(!changeCount);
-    localStorage.setItem('choosen', JSON.stringify([]));
+    dispatch(checkCount(!countChange));
+    localStorage.setItem("choosen", JSON.stringify([]));
     setData([]);
   };
   return (
@@ -73,7 +71,7 @@ const Cart = () => {
         <div className="px-5">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-semibold text-center mt-5 w-[90%] ">
-              {t('basket.basket')}
+              {t("basket.basket")}
             </h2>
             <button className="mt-5 text-[#671ABF]" onClick={handleClearCart}>
               <svg
@@ -146,40 +144,40 @@ const Cart = () => {
             );
           })}
           <div className="flex justify-between mt-5">
-            <h3 className="font-semibold">{t('basket.delivery')}</h3>
-            <p className="text-[#671ABF] font-semibold">{t('basket.free')}</p>
+            <h3 className="font-semibold">{t("basket.delivery")}</h3>
+            <p className="text-[#671ABF] font-semibold">{t("basket.free")}</p>
           </div>
           <div className="flex justify-between mt-5">
-            <h3 className="text-[18px] font-semibold">{t('basket.all')}</h3>
+            <h3 className="text-[18px] font-semibold">{t("basket.all")}</h3>
             <p className="">
-              {allPrice.toLocaleString()} {t('price')}
+              {allPrice.toLocaleString()} {t("price")}
             </p>
           </div>
           <button
             className="mx-auto w-[60%] justify-center bg-[#671ABF] p-2 px-5 flex mt-4 rounded-3xl text-white"
-            onClick={() => navigate('/order')}
+            onClick={() => navigate("/order")}
           >
-            {t('basket.order')}
+            {t("basket.order")}
           </button>
         </div>
       ) : (
         <div className="mt-10 text-center">
           <h2 className="text-2xl mt-[180px] text-center font-semibold">
-            {t('basket.basket')}
+            {t("basket.basket")}
           </h2>
           <img
             src={CartImage}
             alt=""
             className="w-[200px] h-[180px] mx-auto object-cover"
           />
-          <h2 className="text-xl font-semibold ">{t('basket.empty')}</h2>
+          <h2 className="text-xl font-semibold ">{t("basket.empty")}</h2>
 
-          <p>{t('basket.add_to_see')}</p>
+          <p>{t("basket.add_to_see")}</p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             className="w-[80%] rounded-3xl mt-4 p-2 text-center text-white text-[18px] mx-auto bg-[#671ABF]"
           >
-            {t('basket.button')}
+            {t("basket.button")}
           </button>
         </div>
       )}

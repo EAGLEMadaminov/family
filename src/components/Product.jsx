@@ -9,17 +9,18 @@ import {
 import { useTranslation } from "react-i18next";
 import axiosInstance from "../utils/libs/axios";
 import { toast } from "react-toastify";
-import { data } from "autoprefixer";
 
 const Product = ({ data: product }) => {
   const [productStates, setProductStates] = useState({});
   const countChange = useSelector((store) => store.footer.isChangeCount);
   const productState = productStates[product.id] || {};
+
   const {
     showPrice = product.showPrice,
     count = product.count,
     isLiked,
   } = productState;
+
   const isChangeLike = useSelector((store) => store.product.isChangeLike);
   const { t } = useTranslation();
 
@@ -29,11 +30,14 @@ const Product = ({ data: product }) => {
     let changedCount = 0;
     let newValue = array.map((item) => {
       if (item.id === product.id && item.count > 1) {
-        item.count = item.count - 1;
-        changedCount = item.count;
+        // Create a new object with updated count
+        const updatedItem = { ...item, count: item.count - 1 };
+        changedCount = updatedItem.count;
+        return updatedItem;
       }
       return item;
     });
+
     updateProductState(product.id, { count: changedCount });
     return newValue;
   };
@@ -94,12 +98,13 @@ const Product = ({ data: product }) => {
     }
 
     dispatch(checkCount(!countChange));
-    let oldValues = JSON.parse(localStorage.getItem("choosen"));
-    oldValues = Boolean(oldValues) ? oldValues : [];
+    let oldValues = JSON.parse(localStorage.getItem("choosen")) || [];
 
-    oldValues.push(product);
+    // Create a copy of the product with the necessary updates
+    const updatedProduct = { ...product, showPrice: true, count: 1 };
+
+    oldValues = [...oldValues, updatedProduct];
     localStorage.setItem("choosen", JSON.stringify(oldValues));
-    let updatedProduct = { ...product, showPrice: true, count: 1 };
     updateProductState(product.id, updatedProduct);
   };
 
@@ -111,25 +116,26 @@ const Product = ({ data: product }) => {
   };
 
   const productLikeFunction = (product, value) => {
-    let oldValues = JSON.parse(localStorage.getItem(value));
-    let arr = oldValues ? oldValues : [];
+    let oldValues = JSON.parse(localStorage.getItem(value)) || [];
     let checkLike = false;
-    arr.forEach((item) => {
+
+    oldValues = oldValues.filter((item) => {
       if (item.id === product.id) {
         checkLike = true;
+        return false; // Filter out the liked item
       }
+      return true; // Keep other items
     });
-    let updatedProduct = { ...product };
-    if (checkLike) {
-      arr = arr.filter((item) => item.id !== product.id);
-      updatedProduct.isLiked = false;
-      localStorage.setItem(value, JSON.stringify(arr));
+
+    if (!checkLike) {
+      const likedProduct = { ...product, isLiked: true };
+      oldValues = [...oldValues, likedProduct];
+      updateProductState(product.id, { isLiked: true });
     } else {
-      updatedProduct.isLiked = true;
-      arr.push(product);
-      localStorage.setItem(value, JSON.stringify(arr));
+      updateProductState(product.id, { isLiked: false });
     }
-    updateProductState(product.id, updatedProduct);
+
+    localStorage.setItem(value, JSON.stringify(oldValues));
   };
 
   const showWithTokenLike = async (product, token) => {
@@ -150,15 +156,16 @@ const Product = ({ data: product }) => {
   };
 
   const handleLikeBtn = (product) => {
+    console.log(product);
+
     dispatch(checkLike(!isChangeLike));
     let token = localStorage.getItem("access_token");
-    let value = "";
+    let value = token ? "userLikedList" : "likedList";
+
     if (token) {
       showWithTokenLike(product, token);
-      value = "userLikedList";
-    } else {
-      value = "likedList";
     }
+
     productLikeFunction(product, value);
   };
 

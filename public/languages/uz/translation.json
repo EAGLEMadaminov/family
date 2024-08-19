@@ -67,7 +67,8 @@
     "uzbek_sum": "Uzbek so'mi",
     "log_out": "Accountdan chiqish",
     "please_enter": "Iltimos ismingiz va raqamingizni kiriting.",
-    "send_code": "Biz sizning raqamingizga code yubordik. Uni kiriting."
+    "send_code": "Biz sizning raqamingizga code yubordik. Uni kiriting.",
+    "my-order": "Buyurtmalarim"
   },
   "comment": {
     "comment": "Izoh",

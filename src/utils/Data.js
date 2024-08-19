@@ -89,6 +89,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "tort",
+            category_id: 1,
           },
           {
             title: "sweet-2",
@@ -100,6 +101,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "tort",
+            category_id: 1,
           },
           {
             title: "sweet-3",
@@ -111,6 +113,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "tort",
+            category_id: 1,
           },
           {
             title: "sweet-4",
@@ -122,6 +125,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "tort",
+            category_id: 1,
           },
           {
             title: "sweet-5",
@@ -133,6 +137,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "tort",
+            category_id: 1,
           },
           {
             title: "sweet-6",
@@ -144,6 +149,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "tort",
+            category_id: 1,
           },
           {
             title: "sweet-7",
@@ -155,6 +161,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "tort",
+            category_id: 1,
           },
         ],
       },
@@ -172,6 +179,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "pishiriq",
+            category_id: 2,
           },
           {
             title: "Shirinlik2",
@@ -183,6 +191,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "pishiriq",
+            category_id: 2,
           },
           {
             title: "Shirinlik3",
@@ -194,6 +203,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "pishiriq",
+            category_id: 2,
           },
           {
             title: "Shirinlik4",
@@ -205,6 +215,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "pishiriq",
+            category_id: 2,
           },
           {
             title: "Shirinlik5",
@@ -216,6 +227,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "pishiriq",
+            category_id: 2,
           },
           {
             title: "Shirinlik6",
@@ -227,6 +239,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "pishiriq",
+            category_id: 2,
           },
           {
             title: "Shirinlik7",
@@ -238,6 +251,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "pishiriq",
+            category_id: 2,
           },
         ],
       },
@@ -255,6 +269,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Cola",
@@ -266,6 +281,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Dena",
@@ -277,6 +293,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Fanta",
@@ -288,6 +305,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Dena",
@@ -299,6 +317,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Fanta",
@@ -310,6 +329,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Dena",
@@ -321,6 +341,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002170642530,
             category: "ichimlik",
+            category_id: 3,
           },
         ],
       },
@@ -347,6 +368,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "taom",
+            category_id: 1,
           },
           {
             title: "Lag'mon",
@@ -358,6 +380,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "taom",
+            category_id: 1,
           },
           {
             title: "Bishteks",
@@ -369,6 +392,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "taom",
+            category_id: 1,
           },
           {
             title: "Qotirma",
@@ -380,6 +404,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "taom",
+            category_id: 1,
           },
           {
             title: "Tiftel qotorma",
@@ -391,6 +416,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "taom",
+            category_id: 1,
           },
           {
             title: "Tiftel sho'rva",
@@ -402,6 +428,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "taom",
+            category_id: 1,
           },
           {
             title: "Manti",
@@ -414,6 +441,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "taom",
+            category_id: 1,
           },
         ],
       },
@@ -431,6 +459,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "desert",
+            category_id: 2,
           },
           {
             title: "Shirinlik2",
@@ -442,6 +471,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "desert",
+            category_id: 2,
           },
           {
             title: "Shirinlik3",
@@ -453,6 +483,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "desert",
+            category_id: 2,
           },
           {
             title: "Shirinlik4",
@@ -464,6 +495,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "desert",
+            category_id: 2,
           },
           {
             title: "Shirinlik5",
@@ -475,6 +507,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "desert",
+            category_id: 2,
           },
           {
             title: "Shirinlik6",
@@ -486,6 +519,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "desert",
+            category_id: 2,
           },
           {
             title: "Shirinlik7",
@@ -497,6 +531,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "desert",
+            category_id: 2,
           },
         ],
       },
@@ -514,6 +549,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Cola",
@@ -525,6 +561,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Dena",
@@ -536,6 +573,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Fanta",
@@ -547,6 +585,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Dena",
@@ -558,6 +597,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Fanta",
@@ -569,6 +609,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "ichimlik",
+            category_id: 3,
           },
           {
             title: "Dena",
@@ -580,6 +621,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "ichimlik",
+            category_id: 3,
           },
         ],
       },
@@ -598,6 +640,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "non",
+            category_id: 4,
           },
           {
             title: "Yopgan non",
@@ -609,6 +652,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "non",
+            category_id: 4,
           },
           {
             title: "Uy noni",
@@ -621,6 +665,7 @@ const restaurants = [
             isLiked: false,
             restaurant_id: 1002218599398,
             category: "non",
+            category_id: 4,
           },
         ],
       },
