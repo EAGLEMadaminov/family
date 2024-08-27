@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { showInformation } from "../redux/slices/footer";
 import Phone from "../assets/phone.png";
+import { categories } from "../utils/Data";
 
 const InformationPopup = ({ id }) => {
   const dispatch = useDispatch();
+  const [selectedRestaurant, setSelectedRestaurant] = useState({});
+
+  useEffect(() => {
+    let restaunrantInfo = categories.filter((item) => {
+      if (item.id == id) {
+        return item;
+      }
+    });
+    setSelectedRestaurant(restaunrantInfo[0].information);
+  }, []);
+
   return (
     <div className="fixed z-[100000000] rounded-t-[35px] border-t border-[#222] w-[100%] bottom-0 min-h-[90vh] bg-white">
       <div className="flex justify-between px-5 my-5 border-b py-7 border-[#671ABF]">
@@ -37,7 +49,7 @@ const InformationPopup = ({ id }) => {
             className="w-[50px] h-[50px] bg-transparent"
           />
           <a href="" className="ml-5 text-xl font-semibold text-[#E12E68]">
-            @restaurant
+            {selectedRestaurant?.instagram}
           </a>
         </div>
         <div className="flex items-center mt-7 border-b pb-7 px-5">
@@ -48,7 +60,7 @@ const InformationPopup = ({ id }) => {
           />
 
           <a href="tel:" className="ml-5 text-xl font-semibold">
-            +998 90 123-45-67
+            {selectedRestaurant?.phone}
           </a>
         </div>
         <div className="flex items-center mt-7 border-b pb-7 pr-5 pl-3">
@@ -57,9 +69,7 @@ const InformationPopup = ({ id }) => {
             alt=""
             className="w-[60px] "
           />
-          <p className="ml-5 text-xl">
-            Serob MFY O&apos;zbekiston ko&apos;cha N54
-          </p>
+          <p className="ml-5 text-xl">{selectedRestaurant?.location}</p>
         </div>
         <div className="flex items-center mt-7 pb-7 border-b px-5">
           <img
@@ -67,7 +77,7 @@ const InformationPopup = ({ id }) => {
             alt="instagram icon image"
             className="w-[50px] h-[50px] bg-transparent"
           />
-          <p className="ml-5 text-xl">Har kuni soat 8:00 dan 22:00 gacha</p>
+          <p className="ml-5 text-xl">{selectedRestaurant?.workTime}</p>
         </div>
       </div>
     </div>

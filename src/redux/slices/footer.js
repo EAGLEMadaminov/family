@@ -26,4 +26,5 @@ const footerSlice = createSlice({
 });
 
 export const { showAccount, checkCount, showInformation } = footerSlice.actions;
+
 export default footerSlice.reducer;

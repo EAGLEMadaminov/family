@@ -59,6 +59,13 @@ const Purchase = () => {
 
   const handleOrderBtn = async (data) => {
     const choosenProducts = localStorage.getItem("choosen");
+    if (mapUrl) {
+      data.map = {
+        lat: selectedLocation.lat,
+        lang: selectedLocation.lng,
+      };
+    }
+    console.log(data);
 
     if (token) {
       data.phone_number = phoneVale.replace(/\s/g, "");
@@ -207,7 +214,7 @@ const Purchase = () => {
 
               <LoadScript googleMapsApiKey="AIzaSyDaZ10eIqb3u2d4t9uNBFSrTQUhj1iDP_w">
                 <GoogleMap
-                  mapContainerStyle={{ width: "100%", height: "400px" }}
+                  mapContainerStyle={{ width: "95vw", height: "400px" }}
                   center={
                     clickCurrent
                       ? selectedLocation

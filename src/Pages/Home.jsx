@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
-import { categories } from '../utils/Data';
-import Restaurant from '../components/RestaurantComponent';
+import { useSelector } from "react-redux";
+import { categories } from "../utils/Data";
+import Restaurant from "../components/RestaurantComponent";
 const Home = () => {
   const lang = useSelector((store) => store.main.lang);
 
