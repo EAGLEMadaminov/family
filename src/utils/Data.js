@@ -124,7 +124,7 @@ const restaurants = [
           {
             title: "Rulet",
             image: Sweet4,
-            price: "140 000",
+            price: "60 000",
             id: 4,
             count: 1,
             showPrice: false,
