@@ -59,6 +59,15 @@ const Purchase = () => {
 
   const handleOrderBtn = async (data) => {
     const choosenProducts = localStorage.getItem("choosen");
+
+    if (
+      JSON.parse(choosenProducts).every(
+        (product) => product.category === "ichimlik"
+      )
+    ) {
+      return toast.warn("Siz ichimlikga qo'shimcha narsa olishingiz kerak.");
+    }
+
     if (mapUrl) {
       data.map = {
         lat: selectedLocation.lat,
