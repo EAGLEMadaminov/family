@@ -100,7 +100,7 @@ const restaurants = [
           {
             title: "Rulet",
             image: Sweet2,
-            price: "50 000",
+            price: "10- 000",
             id: 2,
             count: 1,
             showPrice: false,
@@ -124,7 +124,7 @@ const restaurants = [
           {
             title: "Rulet",
             image: Sweet4,
-            price: "60 000",
+            price: "100 000",
             id: 4,
             count: 1,
             showPrice: false,
