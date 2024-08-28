@@ -42,7 +42,6 @@ const ProductPopup = ({ data: product }) => {
         <button
           onClick={() => {
             dispatch(showSingleProduct(false));
-            console.log(product);
           }}
           className=" p-1 absolute right-3 top-1 bg-gray-400 rounded-[50%]"
         >

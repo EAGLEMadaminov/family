@@ -28,7 +28,6 @@ const Purchase = () => {
   };
   const handleGeolocationSuccess = (position) => {
     const { latitude, longitude } = position.coords;
-    console.log(latitude, longitude);
     setSelectedLocation({ lat: latitude, lng: longitude });
   };
 
@@ -53,7 +52,6 @@ const Purchase = () => {
       lng: event.latLng.lng(),
     });
     const url = `https://www.google.com/maps/@${event.latLng.lat()},${event.latLng.lng()},${15}z`;
-    console.log(url);
     setMapUrl(url);
   };
 
@@ -74,22 +72,18 @@ const Purchase = () => {
         lang: selectedLocation.lng,
       };
     }
-    console.log(data);
 
     if (token) {
       data.phone_number = phoneVale.replace(/\s/g, "");
-      console.log(mapUrl);
       if (mapUrl) {
         data.url = mapUrl;
       }
       data.products = choosenProducts;
-      console.log(data);
       if (isDelivery) {
         data.isDelivery = true;
       } else {
         data.isDelivery = false;
       }
-      console.log(data);
 
       try {
         const { data: res } = await axiosInstance.post("/order", data, {

@@ -11,9 +11,7 @@ const Comments = () => {
   const showComment = useSelector((store) => store.head.showComments);
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
+  const ratingChanged = (newRating) => {};
   return (
     <div className="bg-white border-t  z-[10] rounded-t-2xl w-full p-4 top-[70px] absolute left-0 right-0">
       <div className="relative">

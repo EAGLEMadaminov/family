@@ -4,7 +4,6 @@ import Restaurant from "../components/RestaurantComponent";
 const Home = () => {
   const lang = useSelector((store) => store.main.lang);
 
-  console.log(lang);
   return (
     <div className="mt-[200px] translate-y-[-100px]">
       <h2 className="text-3xl font-semibold text-center mt-5">Restaurants</h2>

@@ -8,7 +8,6 @@ const Sweets = () => {
 
   const addToCartBtn = (item) => {
     setCart(...cart, item);
-    console.log(cart);
   };
   return (
     <div className="px-5">

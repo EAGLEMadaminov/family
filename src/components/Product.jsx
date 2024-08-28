@@ -149,14 +149,12 @@ const Product = ({ data: product }) => {
           },
         }
       );
-      console.log(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
   const handleLikeBtn = (product) => {
-    console.log(product);
 
     dispatch(checkLike(!isChangeLike));
     let token = localStorage.getItem("access_token");
