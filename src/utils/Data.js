@@ -98,9 +98,9 @@ const restaurants = [
             category_id: 1,
           },
           {
-            title: "Rulet",
+            title: "Rulet qora shokoladli",
             image: Sweet2,
-            price: "10- 000",
+            price: "100 000",
             id: 2,
             count: 1,
             showPrice: false,
@@ -134,7 +134,7 @@ const restaurants = [
             category_id: 1,
           },
           {
-            title: "Tort",
+            title: "Limonli Tort",
             image: Sweet5,
             price: "150 000",
             id: 5,
@@ -146,7 +146,7 @@ const restaurants = [
             category_id: 1,
           },
           {
-            title: "Tort",
+            title: "Mevali tort",
             image: Sweet6,
             price: "160 000",
             id: 6,
