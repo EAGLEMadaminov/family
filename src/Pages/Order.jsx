@@ -105,7 +105,7 @@ const Purchase = () => {
         }
       } catch (error) {
         console.log(error);
-        toast.error("Nimadir xato ketdi");
+        // toast.error("Nimadir xato ketdi");
       }
     } else {
       toast.warn(
